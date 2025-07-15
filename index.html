@@ -5,18 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="MAWTIF HR - Global HR Consultancy" />
   <title>MAWTIF</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
   <style>
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       background-color: #000;
       color: #D2BF37;
       font-family: 'Cinzel', serif;
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
     }
-    @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
-    .float-anim { animation: float 3s ease-in-out infinite; }
+    /* Float animation */
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    .float-anim {
+      animation: float 3s ease-in-out infinite;
+    }
+    /* Glow spark */
     .glow-spark {
       text-shadow: 0 0 6px #D2BF37, 0 0 12px #D2BF37;
       animation: spark-glow 1.5s ease-in-out infinite alternate;
@@ -25,6 +36,7 @@
       from { text-shadow: 0 0 6px #D2BF37, 0 0 12px #D2BF37; }
       to { text-shadow: 0 0 10px #fff159, 0 0 20px #fff159; }
     }
+    /* Large background watermark */
     .shadow-logo::before {
       content: "MAWTIF";
       position: fixed;
@@ -39,6 +51,7 @@
       z-index: 0;
       pointer-events: none;
     }
+    /* Header & Menu */
     header {
       background-color: black;
       position: sticky;
@@ -46,6 +59,7 @@
       z-index: 100;
       padding: 1rem;
       display: flex;
+      justify-content: flex-start;
       align-items: center;
     }
     #menu-toggle {
@@ -54,83 +68,251 @@
       color: #D2BF37;
       font-family: 'Cinzel', serif;
       font-size: 1rem;
-      padding: 0.4rem 1rem;
+      padding: 0.4rem 1.2rem;
       border-radius: 9999px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      margin-right: auto;
+      user-select: none;
+      z-index: 150;
+      position: relative;
     }
     #menu-toggle:hover {
       background-color: #D2BF37;
       color: black;
     }
     nav {
-      display: none;
-      flex-direction: column;
-      align-items: flex-start;
-      position: absolute;
-      top: 60px;
+      position: fixed;
+      top: 60px; /* below header */
       left: 1rem;
-      background: black;
-      border: 1px solid #D2BF37;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
+      background: rgba(0,0,0,0.95);
+      border: 2px solid #D2BF37;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1.5rem;
+      gap: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      max-width: 200px;
+      z-index: 140;
+      user-select: none;
     }
     nav.active {
-      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
     }
     nav a {
       color: #D2BF37;
       font-weight: 600;
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       text-decoration: none;
-      margin: 0.3rem 0;
       cursor: pointer;
       transition: color 0.3s ease;
+      user-select: none;
     }
-    nav a:hover { color: #fff159; }
+    nav a:hover {
+      color: #fff159;
+    }
+    /* Responsive: nav becomes horizontal on wider screens */
     @media (min-width: 640px) {
-      nav { flex-direction: row; position: static; background: none; padding: 0; border: none; }
-      nav a { display: inline-block; margin: 0 1rem; }
+      nav {
+        position: static;
+        flex-direction: row;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: none !important;
+        background: none;
+        border: none;
+        padding: 0;
+        max-width: none;
+      }
+      nav a {
+        margin-left: 1.5rem;
+      }
+      #menu-toggle {
+        display: none;
+      }
     }
+    /* Sections */
     section {
       padding: 4rem 1rem;
       max-width: 1100px;
-      margin: 0 auto;
+      margin: 0 auto 3rem auto;
       position: relative;
       z-index: 10;
     }
-    section + section { margin-top: 5rem; }
     section h3 {
       font-size: 2.2rem;
       font-weight: 700;
       text-align: center;
       margin-bottom: 2rem;
     }
-    .service-card {
-      border: 2px solid #D2BF37;
-      padding: 1rem;
-      border-radius: 1rem;
-      color: #D2BF37;
+    /* Front page styles */
+    #frontpage h1 {
+      font-size: 4rem;
+      font-weight: 900;
       text-align: center;
-      transition: box-shadow 0.3s ease;
+      margin-bottom: 0.5rem;
+    }
+    #frontpage h2 {
+      font-size: 1.5rem;
+      text-align: center;
       margin-bottom: 1.5rem;
-      font-size: 0.85rem;
-      max-width: 500px;
+    }
+    #frontpage p {
+      max-width: 700px;
       margin-left: auto;
       margin-right: auto;
+      text-align: center;
+      margin-bottom: 1rem;
+      font-weight: 600;
     }
-    .service-card:hover { box-shadow: 0 0 15px #D2BF37; }
+    #frontpage a.explore-btn {
+      display: inline-block;
+      padding: 0.6rem 2rem;
+      border: 2px solid #D2BF37;
+      border-radius: 9999px;
+      color: #D2BF37;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    #frontpage a.explore-btn:hover {
+      background-color: #D2BF37;
+      color: black;
+      box-shadow: 0 0 10px #D2BF37;
+    }
+    /* Service buttons (like original) */
+    .service-card {
+      border: 2px solid #D2BF37;
+      background: transparent;
+      color: #D2BF37;
+      border-radius: 1rem;
+      padding: 0.7rem 1.2rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-align: center;
+      cursor: pointer;
+      max-width: 320px;
+      margin: 0.7rem auto;
+      user-select: none;
+      box-shadow: none;
+      transition: box-shadow 0.3s ease, background-color 0.3s ease;
+      outline: 2px solid transparent;
+    }
+    .service-card:hover,
+    .service-card:focus {
+      box-shadow: 0 0 15px #D2BF37;
+      background-color: rgba(210,191,55,0.15);
+      outline: 2px solid #fff159;
+    }
+    /* Modals */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 200;
+      user-select: none;
+    }
+    .modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-content {
+      background: rgba(210,191,55,0.15);
+      border: 2px solid #D2BF37;
+      box-shadow: 0 0 20px #D2BF37;
+      padding: 2rem 2.5rem;
+      border-radius: 1rem;
+      color: #D2BF37;
+      max-width: 420px;
+      text-align: center;
+      font-weight: 600;
+      position: relative;
+      user-select: text;
+    }
+    .modal-content h4 {
+      margin-bottom: 1rem;
+      font-weight: 900;
+      font-size: 1.6rem;
+      font-family: 'Cinzel', serif;
+    }
+    .modal-content p {
+      font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+    .modal-content button.close-btn {
+      background: transparent;
+      border: 2px solid #D2BF37;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      color: #D2BF37;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    .modal-content button.close-btn:hover {
+      background-color: #D2BF37;
+      color: black;
+    }
+    /* Appreciation quotes */
+    #appreciation blockquote {
+      font-style: italic;
+      max-width: 700px;
+      margin: 1.5rem auto;
+      text-align: center;
+      color: #D2BF37;
+      user-select: text;
+    }
+    #appreciation blockquote + blockquote {
+      margin-top: 2rem;
+    }
+    /* About */
+    #about p {
+      max-width: 800px;
+      margin: 0 auto 1.2rem auto;
+      text-align: center;
+      font-weight: 600;
+    }
+    #about blockquote {
+      font-style: italic;
+      font-weight: 600;
+      max-width: 650px;
+      margin: 2rem auto 0 auto;
+      text-align: center;
+      user-select: text;
+    }
+    #about blockquote span {
+      display: block;
+      margin-top: 0.8rem;
+      font-weight: 900;
+    }
+    /* Contact form fields compact */
     form input,
     form textarea {
       width: 100%;
       margin-bottom: 0.5rem;
-      padding: 0.3rem 0.5rem;
+      padding: 0.4rem 0.6rem;
       background: black;
       border: 1.5px solid #D2BF37;
       color: #D2BF37;
       border-radius: 0.5rem;
       font-size: 0.75rem;
+      font-weight: 600;
+      user-select: text;
+      resize: vertical;
     }
     form button {
       padding: 0.5rem 1.5rem;
@@ -140,6 +322,8 @@
       border-radius: 9999px;
       font-weight: 700;
       cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
     }
     form button:hover {
       background-color: #D2BF37;
@@ -148,82 +332,166 @@
   </style>
 </head>
 <body>
+
   <header>
-    <button id="menu-toggle">MAWTIF</button>
-    <nav id="main-menu">
-      <a href="#frontpage">Home</a>
-      <a href="#services">Our Services</a>
-      <a href="#appreciation">Appreciation</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+    <button id="menu-toggle" aria-expanded="false" aria-controls="main-menu">MAWTIF</button>
+    <nav id="main-menu" role="navigation" aria-label="Primary menu">
+      <a href="#frontpage" tabindex="0">Home</a>
+      <a href="#services" tabindex="0">Our Services</a>
+      <a href="#appreciation" tabindex="0">Appreciation</a>
+      <a href="#about" tabindex="0">About</a>
+      <a href="#contact" tabindex="0">Contact</a>
     </nav>
   </header>
+
   <div class="shadow-logo"></div>
 
   <section id="frontpage">
-    <h1 class="float-anim glow-spark" style="font-size: 4rem; text-align: center; margin-bottom: 0.5rem;">MAWTIF HR</h1>
-    <h2 class="float-anim" style="text-align: center; font-size: 1.5rem;">Global HR Expertise, Tailored For You</h2>
-    <div style="text-align: center; margin-top: 1.5rem;">
-      <p style="margin-bottom: 1rem; max-width: 700px; margin-left:auto; margin-right:auto;">Proudly partnering with organizations in UAE, Bangladesh, India, Sri Lanka, Europe, Nepal & Bhutan — because exceptional HR knows no borders.</p>
-      <a href="#services" style="padding: 0.6rem 2rem; border: 2px solid #D2BF37; border-radius: 9999px; color: #D2BF37; text-decoration: none; font-weight: 700;">Explore Services</a>
-    </div>
+    <h1 class="float-anim glow-spark">MAWTIF HR</h1>
+    <h2 class="float-anim">Global HR Expertise, Tailored For You</h2>
+    <p>Proudly partnering with organizations in UAE, Bangladesh, India, Sri Lanka, Europe, Nepal & Bhutan — because exceptional HR knows no borders.</p>
+    <a href="#services" class="explore-btn">Explore Services</a>
   </section>
 
   <section id="services">
     <h3>Our Services</h3>
-    <div class="service-card">Talent Acquisition — Align hiring with vision using structured, global-grade methods.</div>
-    <div class="service-card">Training & Development — Empower teams with skill-building and leadership coaching.</div>
-    <div class="service-card">OD & Talent Management — Structure teams and build pipelines for scale.</div>
-    <div class="service-card">Total Reward — Design compelling benefits, equity, and incentive programs.</div>
-    <div class="service-card">Policy & Compliance — Build clarity and alignment across countries and laws.</div>
+    <button class="service-card" type="button" aria-haspopup="dialog" aria-controls="modal1" onclick="toggleModal('modal1')">Talent Acquisition</button>
+    <button class="service-card" type="button" aria-haspopup="dialog" aria-controls="modal2" onclick="toggleModal('modal2')">Training & Development</button>
+    <button class="service-card" type="button" aria-haspopup="dialog" aria-controls="modal3" onclick="toggleModal('modal3')">OD & Talent Management</button>
+    <button class="service-card" type="button" aria-haspopup="dialog" aria-controls="modal4" onclick="toggleModal('modal4')">Total Reward</button>
+    <button class="service-card" type="button" aria-haspopup="dialog" aria-controls="modal5" onclick="toggleModal('modal5')">Policy & Compliance</button>
   </section>
 
   <section id="appreciation">
     <h3>Client Appreciation</h3>
-    <blockquote style="text-align: center; font-style: italic; max-width:700px; margin:auto;">"MAWTIF HR helped us build a people-first culture that drives results."</blockquote>
-    <blockquote style="text-align: center; font-style: italic; max-width:700px; margin:auto;">"With MAWTIF, our DEI strategy became more than a buzzword — it became impact."</blockquote>
-    <blockquote style="text-align: center; font-style: italic; max-width:700px; margin:auto;">"Policy alignment, leadership readiness, and org growth — MAWTIF delivered on all fronts."</blockquote>
-    <blockquote style="text-align: center; font-style: italic; max-width:700px; margin:auto;">"MAWTIF empowered our HR to act globally while staying legally compliant locally. Brilliant blend."</blockquote>
-    <blockquote style="text-align: center; font-style: italic; max-width:700px; margin:auto;">"Exceptional support from MAWTIF HR during our expansion into South Asia. Highly recommended."</blockquote>
+    <blockquote>"MAWTIF HR helped us build a people-first culture that drives results."</blockquote>
+    <blockquote>"With MAWTIF, our DEI strategy became more than a buzzword — it became impact."</blockquote>
+    <blockquote>"Policy alignment, leadership readiness, and org growth — MAWTIF delivered on all fronts."</blockquote>
+    <blockquote>"Their insight and responsiveness helped us stay ahead in complex markets."</blockquote>
+    <blockquote>"MAWTIF’s approach is strategic, compassionate, and results-driven."</blockquote>
   </section>
 
   <section id="about">
     <h3>About MAWTIF HR</h3>
-    <p style="text-align:center; max-width: 800px; margin: auto;">MAWTIF HR is a bold, global HR consultancy founded on real industry insight. We specialize in strategic talent acquisition, OD, DEI, compliance, and reward systems built for scale. Our advisory helps global firms localize smartly — combining regulatory compliance with people-centric innovation.</p>
-    <p style="text-align:center; max-width: 800px; margin: auto;">Our team draws from top leadership roles across tech, logistics, and finance sectors — empowering you with data-driven recruitment, policy clarity, leadership pipelines, and sustainable HR infrastructure.</p>
-    <blockquote style="text-align:center; margin-top: 2rem; font-style: italic;">“As the Founder & CEO of MAWTIF, I believe in building cultures that are not only compliant, but courageous.”<br><span style="display: block; font-weight: bold;">— Founder & CEO</span></blockquote>
+    <p>MAWTIF HR is a bold, global HR consultancy founded on real industry insight. We specialize in strategic talent acquisition, OD, DEI, compliance, and reward systems built for scale. Our advisory helps global firms localize smartly — combining regulatory compliance with people-centric innovation.</p>
+    <p>Our team draws from top leadership roles across tech, logistics, and finance sectors — empowering you with data-driven recruitment, policy clarity, leadership pipelines, and sustainable HR infrastructure.</p>
+    <blockquote>“As the Founder & CEO of MAWTIF, I believe in building cultures that are not only compliant, but courageous.”<br><span>— Founder & CEO</span></blockquote>
   </section>
 
   <section id="contact">
     <h3>Contact Us</h3>
     <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
       <textarea placeholder="Your Message" rows="4" required></textarea>
       <button type="submit">Send Message</button>
     </form>
   </section>
 
+  <!-- Modals -->
+  <div id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal1-title" tabindex="-1">
+    <div class="modal-content">
+      <h4 id="modal1-title">Talent Acquisition</h4>
+      <p>We align your hiring with business vision through structured, data-driven recruitment solutions.</p>
+      <button class="close-btn" onclick="toggleModal('modal1')">Close</button>
+    </div>
+  </div>
+  <div id="modal2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal2-title" tabindex="-1">
+    <div class="modal-content">
+      <h4 id="modal2-title">Training & Development</h4>
+      <p>Upskill your workforce with custom programs, leadership sessions, and digital learning ecosystems.</p>
+      <button class="close-btn" onclick="toggleModal('modal2')">Close</button>
+    </div>
+  </div>
+  <div id="modal3" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal3-title" tabindex="-1">
+    <div class="modal-content">
+      <h4 id="modal3-title">OD & Talent Management</h4>
+      <p>We design organization-wide structures, workforce models, and succession strategies that scale.</p>
+      <button class="close-btn" onclick="toggleModal('modal3')">Close</button>
+    </div>
+  </div>
+  <div id="modal4" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal4-title" tabindex="-1">
+    <div class="modal-content">
+      <h4 id="modal4-title">Total Reward</h4>
+      <p>Designing global-grade compensation, incentives, and flexible benefits policies with ROI focus.</p>
+      <button class="close-btn" onclick="toggleModal('modal4')">Close</button>
+    </div>
+  </div>
+  <div id="modal5" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal5-title" tabindex="-1">
+    <div class="modal-content">
+      <h4 id="modal5-title">Policy & Compliance</h4>
+      <p>Our policy frameworks align legal standards with dynamic, values-driven workplace practices.</p>
+      <button class="close-btn" onclick="toggleModal('modal5')">Close</button>
+    </div>
+  </div>
+
   <script>
     const menuToggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('main-menu');
-    menuToggle.addEventListener('click', () => {
-      menu.classList.toggle('active');
-    });
-
     let wheelTriggered = false;
-    window.addEventListener('wheel', () => {
-      if (!wheelTriggered) {
+
+    menuToggle.addEventListener('click', () => {
+      if (menu.classList.contains('active')) {
+        menu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      } else {
         menu.classList.add('active');
-        wheelTriggered = true;
-        setTimeout(() => { wheelTriggered = false; }, 1500);
+        menuToggle.setAttribute('aria-expanded', 'true');
       }
     });
 
-    document.querySelectorAll('nav a').forEach(link => {
+    // Smooth wheel-triggered menu open (only once)
+    window.addEventListener('wheel', event => {
+      if (!wheelTriggered && event.deltaY > 20) { // detect meaningful downward wheel scroll
+        menu.classList.add('active');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        wheelTriggered = true;
+      }
+    }, { passive: true });
+
+    // Close menu when clicking on any nav link
+    menu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         menu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
       });
+    });
+
+    // Modal toggle function
+    function toggleModal(id) {
+      const modal = document.getElementById(id);
+      const isActive = modal.classList.contains('active');
+      if (isActive) {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        modal.querySelector('.close-btn').focus();
+      } else {
+        // Close all modals first
+        document.querySelectorAll('.modal.active').forEach(m => {
+          m.classList.remove('active');
+          m.setAttribute('aria-hidden', 'true');
+        });
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        modal.querySelector('.close-btn').focus();
+      }
+    }
+
+    // Close modal when clicking outside modal-content or pressing Escape
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.addEventListener('click', e => {
+        if (e.target === modal) {
+          toggleModal(modal.id);
+        }
+      });
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal.active').forEach(modal => {
+          toggleModal(modal.id);
+        });
+      }
     });
   </script>
 </body>
