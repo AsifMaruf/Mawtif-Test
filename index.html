@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="MAWTIF HR - Global HR Consultancy" />
   <title>MAWTIF</title>
-
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <!-- Cinzel Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
   <style>
     html {
       scroll-behavior: smooth;
@@ -16,8 +15,9 @@
     body {
       background-color: #000;
       color: #D2BF37;
-      font-family: 'Cinzel', serif;
+      font-family: Arial, sans-serif;
     }
+    /* Floating animation */
     @keyframes float {
       0% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
@@ -26,6 +26,7 @@
     .float-anim {
       animation: float 3s ease-in-out infinite;
     }
+    /* Large shadow brand watermark */
     .shadow-logo::before {
       content: "MAWTIF";
       position: fixed;
@@ -40,6 +41,23 @@
       z-index: 0;
       pointer-events: none;
     }
+    /* Smooth transitions */
+    .transition-smooth {
+      transition: all 0.8s ease-in-out;
+    }
+    /* Header styling */
+    header {
+      background-color: black;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.8);
+      padding: 1.5rem 1rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    /* Sticky small brand on scroll */
     #sticky-brand {
       position: fixed;
       top: 10px;
@@ -56,29 +74,54 @@
     #sticky-brand.visible {
       opacity: 1;
     }
-    header {
-      background-color: black;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgb(0 0 0 / 0.8);
+    /* Navigation button */
+    #menu-toggle {
+      background: none;
+      border: 2px solid #D2BF37;
+      color: #D2BF37;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      padding: 0.3rem 1rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    #menu-toggle:hover {
+      background-color: #D2BF37;
+      color: black;
+    }
+    /* Navigation menu hidden by default */
+    nav {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 60px;
+      left: 15px;
+      background: black;
+      border: 2px solid #D2BF37;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      z-index: 120;
+      min-width: 160px;
+    }
+    nav.active {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 1rem;
     }
     nav a {
       color: #D2BF37;
       font-weight: 600;
-      margin-left: 1.5rem;
-      font-size: 0.875rem;
+      font-size: 1rem;
       text-decoration: none;
+      margin: 0.5rem 0;
       cursor: pointer;
       transition: color 0.3s ease;
     }
     nav a:hover {
       color: #fff159;
     }
+    /* Front page text */
     #frontpage {
       min-height: 90vh;
       display: flex;
@@ -97,6 +140,7 @@
       margin-bottom: 0.3rem;
     }
     #frontpage h2 {
+      font-family: Arial, sans-serif;
       font-size: 1.6rem;
       max-width: 600px;
       font-weight: 600;
@@ -117,6 +161,7 @@
       background-color: #c9b02e;
       box-shadow: 0 0 15px #c9b02e;
     }
+    /* Serving globally section */
     #serving-globally {
       text-align: center;
       margin-top: 1rem;
@@ -147,20 +192,232 @@
       color: black;
       box-shadow: 0 0 8px #D2BF37;
     }
-    section h3,
-    .modal-content h4,
-    #sticky-brand {
+    /* Sections spacing */
+    section {
+      padding: 4rem 1rem;
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+      position: relative;
+      z-index: 10;
+    }
+    /* Services Section */
+    #services h3 {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+    #services .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 1.5rem;
+    }
+    #services .service-card {
+      background: transparent;
+      border: 2px solid #D2BF37;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      color: #D2BF37;
+      text-align: center;
+      position: relative;
+      box-shadow: none;
+      transition: box-shadow 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    #services .service-card:hover {
+      box-shadow: 0 0 15px #D2BF37;
+    }
+    #services .service-card h4 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    #services button.details-btn {
+      background: transparent;
+      border: none;
+      color: #D2BF37;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    #services button.details-btn:hover {
+      color: #fff159;
+    }
+    /* Modal styles */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 200;
+    }
+    .modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-content {
+      background: rgba(210,191,55,0.15);
+      border: 2px solid #D2BF37;
+      box-shadow: 0 0 20px #D2BF37;
+      padding: 2rem 2.5rem;
+      border-radius: 1rem;
+      color: #D2BF37;
+      max-width: 420px;
+      text-align: center;
+      font-weight: 600;
+      position: relative;
+      user-select: none;
+    }
+    .modal-content h4 {
+      margin-bottom: 1rem;
+      font-weight: 900;
+      font-size: 1.6rem;
       font-family: 'Cinzel', serif;
+    }
+    .modal-content p {
+      font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+    .modal-content button.close-btn {
+      background: transparent;
+      border: 2px solid #D2BF37;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      color: #D2BF37;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .modal-content button.close-btn:hover {
+      background-color: #D2BF37;
+      color: black;
+    }
+    /* Appreciation section */
+    #appreciation {
+      border: 2px solid #D2BF37;
+      background: transparent !important;
+      padding: 3rem 2rem;
+      border-radius: 1rem;
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      user-select: none;
+    }
+    #appreciation h3 {
+      font-weight: 700;
+      font-size: 2.3rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #D2BF37;
+    }
+    #appreciation blockquote {
+      border-left: 3px solid #D2BF37;
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      opacity: 0.9;
+      user-select: text;
+    }
+    #appreciation cite {
+      font-weight: 700;
+      display: block;
+      margin-top: 0.4rem;
+      color: #D2BF37;
+      user-select: text;
+    }
+    /* About Section */
+    #about {
+      max-width: 800px;
+      margin: 0 auto 4rem;
+      color: #D2BF37;
+    }
+    #about h3 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    #about p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+    #about blockquote {
+      font-style: italic;
+      font-weight: 600;
+      max-width: 650px;
+      margin: 2rem auto 0;
+      text-align: center;
+      user-select: text;
+    }
+    #about blockquote span {
+      display: block;
+      margin-top: 0.8rem;
+      font-weight: 900;
+    }
+    /* Contact Section */
+    #contact {
+      max-width: 600px;
+      margin: 0 auto 4rem;
+    }
+    #contact h3 {
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #D2BF37;
+    }
+    #contact form input,
+    #contact form textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 0.5rem;
+      border: 1.5px solid #D2BF37;
+      background: black;
+      color: #D2BF37;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+    }
+    #contact form input:focus,
+    #contact form textarea:focus {
+      border-color: #fff159;
+      outline: none;
+    }
+    #contact form button {
+      background-color: #D2BF37;
+      color: black;
+      padding: 0.75rem 2rem;
+      font-weight: 700;
+      border-radius: 9999px;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+    #contact form button:hover {
+      background-color: #c9b02e;
     }
   </style>
 </head>
-
 <body>
+
   <header>
-    <nav>
+    <button id="menu-toggle">MAWTIF</button>
+    <nav id="main-menu" aria-label="Main navigation">
       <a href="#frontpage">Home</a>
       <a href="#services">Our Services</a>
-      <a href="#appreciation">Appreciation</a>
+      <a href="#appreciation">Our Appreciation</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -169,6 +426,7 @@
   <div id="sticky-brand">MAWTIF</div>
   <div class="shadow-logo"></div>
 
+  <!-- Front Page -->
   <section id="frontpage" class="transition-smooth">
     <h1 class="float-anim">MAWTIF HR</h1>
     <h2 class="float-anim">Global HR Expertise, Tailored For You</h2>
@@ -179,5 +437,149 @@
       <a href="#services" class="explore-btn">Start Global HR Journey</a>
     </div>
   </section>
+
+  <!-- Services Page -->
+  <section id="services">
+    <h3>Our Services</h3>
+    <div class="services-grid">
+      <div class="service-card">
+        <h4>Talent Acquisition</h4>
+        <button class="details-btn" onclick="toggleModal('modal1')">Details</button>
+      </div>
+      <div class="service-card">
+        <h4>Training & Development</h4>
+        <button class="details-btn" onclick="toggleModal('modal2')">Details</button>
+      </div>
+      <div class="service-card">
+        <h4>OD & Talent Management</h4>
+        <button class="details-btn" onclick="toggleModal('modal3')">Details</button>
+      </div>
+      <div class="service-card">
+        <h4>Total Reward</h4>
+        <button class="details-btn" onclick="toggleModal('modal4')">Details</button>
+      </div>
+      <div class="service-card">
+        <h4>Policy & Compliance</h4>
+        <button class="details-btn" onclick="toggleModal('modal5')">Details</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Appreciation Page -->
+  <section id="appreciation">
+    <h3>Our Appreciation</h3>
+    <blockquote>
+      "MAWTIF HR helped us build a people-first culture that drives results."
+      <cite>— CEO, Fintech Startup</cite>
+    </blockquote>
+    <blockquote>
+      "With MAWTIF, our DEI strategy became more than a buzzword — it became impact."
+      <cite>— Global Director, Fortune 500</cite>
+    </blockquote>
+    <blockquote>
+      "Policy alignment, leadership readiness, and org growth — MAWTIF delivered on all fronts."
+      <cite>— Head of People, MNC Logistics</cite>
+    </blockquote>
+  </section>
+
+  <!-- About Page -->
+  <section id="about">
+    <h3>About MAWTIF HR</h3>
+    <p>
+      MAWTIF HR is a bold, global HR consultancy founded on real industry insight. We specialize in strategic talent acquisition, OD, DEI, compliance, and reward systems built for scale. Our advisory helps global firms localize smartly — combining regulatory compliance with people-centric innovation.
+    </p>
+    <p>
+      Our team draws from top leadership roles across tech, logistics, and finance sectors — empowering you with data-driven recruitment, policy clarity, leadership pipelines, and sustainable HR infrastructure.
+    </p>
+    <blockquote>
+      “As the Founder & CEO of MAWTIF, I believe in building cultures that are not only compliant, but courageous. Our approach integrates local sensitivity with global structure. We don't just design policies — we shape the future of work.”
+      <span>— Founder & CEO, MAWTIF HR</span>
+    </blockquote>
+  </section>
+
+  <!-- Contact Page -->
+  <section id="contact">
+    <h3>Contact Us</h3>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Modals -->
+  <div id="modal1" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal1-title">
+      <h4 id="modal1-title">Talent Acquisition</h4>
+      <p>We align your hiring with business vision through structured, data-driven recruitment solutions.</p>
+      <button class="close-btn" onclick="toggleModal('modal1')">Close</button>
+    </div>
+  </div>
+  <div id="modal2" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal2-title">
+      <h4 id="modal2-title">Training & Development</h4>
+      <p>Upskill your workforce with custom programs, leadership sessions, and digital learning ecosystems.</p>
+      <button class="close-btn" onclick="toggleModal('modal2')">Close</button>
+    </div>
+  </div>
+  <div id="modal3" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal3-title">
+      <h4 id="modal3-title">OD & Talent Management</h4>
+      <p>We design organization-wide structures, workforce models, and succession strategies that scale.</p>
+      <button class="close-btn" onclick="toggleModal('modal3')">Close</button>
+    </div>
+  </div>
+  <div id="modal4" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal4-title">
+      <h4 id="modal4-title">Total Reward</h4>
+      <p>Designing global-grade compensation, incentives, and flexible benefits policies with ROI focus.</p>
+      <button class="close-btn" onclick="toggleModal('modal4')">Close</button>
+    </div>
+  </div>
+  <div id="modal5" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal5-title">
+      <h4 id="modal5-title">Policy & Compliance</h4>
+      <p>Our policy frameworks align legal standards with dynamic, values-driven workplace practices.</p>
+      <button class="close-btn" onclick="toggleModal('modal5')">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Sticky brand appear on scroll past frontpage
+    const stickyBrand = document.getElementById('sticky-brand');
+    const frontpage = document.getElementById('frontpage');
+
+    window.addEventListener('scroll', () => {
+      const frontpageBottom = frontpage.getBoundingClientRect().bottom;
+      if (frontpageBottom < 50) {
+        stickyBrand.classList.add('visible');
+      } else {
+        stickyBrand.classList.remove('visible');
+      }
+    });
+
+    // Modal toggle logic
+    function toggleModal(id) {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      const isActive = modal.classList.contains('active');
+      if (isActive) {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+      } else {
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+    }
+
+    // Menu toggle logic
+    const menuToggleBtn = document.getElementById('menu-toggle');
+    const mainMenu = document.getElementById('main-menu');
+    menuToggleBtn.addEventListener('click', () => {
+      mainMenu.classList.toggle('active');
+    });
+  </script>
+
 </body>
 </html>
