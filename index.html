@@ -1,32 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="MAWTIF HR - Global HR Consultancy" />
   <title>MAWTIF</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <!-- Cinzel Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
     body {
       background-color: #000;
       color: #D2BF37;
-      font-family: Arial, sans-serif;
+      font-family: 'Cinzel', serif;
+      margin: 0;
+      padding: 0;
     }
-    /* Floating animation */
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
+    @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
+    .float-anim { animation: float 3s ease-in-out infinite; }
+    .glow-spark {
+      text-shadow: 0 0 6px #D2BF37, 0 0 12px #D2BF37;
+      animation: spark-glow 1.5s ease-in-out infinite alternate;
     }
-    .float-anim {
-      animation: float 3s ease-in-out infinite;
+    @keyframes spark-glow {
+      from { text-shadow: 0 0 6px #D2BF37, 0 0 12px #D2BF37; }
+      to { text-shadow: 0 0 10px #fff159, 0 0 20px #fff159; }
     }
-    /* Large shadow brand watermark */
     .shadow-logo::before {
       content: "MAWTIF";
       position: fixed;
@@ -41,70 +39,42 @@
       z-index: 0;
       pointer-events: none;
     }
-    /* Smooth transitions */
-    .transition-smooth {
-      transition: all 0.8s ease-in-out;
-    }
-    /* Header styling */
     header {
       background-color: black;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 8px rgb(0 0 0 / 0.8);
-      padding: 1.5rem 1rem;
+      padding: 1rem;
       display: flex;
-      justify-content: flex-start;
       align-items: center;
     }
-    /* Sticky small brand on scroll */
-    #sticky-brand {
-      position: fixed;
-      top: 10px;
-      left: 15px;
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-      font-size: 1.8rem;
-      color: #D2BF37;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      z-index: 110;
-      user-select: none;
-    }
-    #sticky-brand.visible {
-      opacity: 1;
-    }
-    /* Navigation button */
     #menu-toggle {
       background: none;
       border: 2px solid #D2BF37;
       color: #D2BF37;
       font-family: 'Cinzel', serif;
-      font-weight: 900;
-      font-size: 1.2rem;
-      padding: 0.3rem 1rem;
+      font-size: 1rem;
+      padding: 0.4rem 1rem;
       border-radius: 9999px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      user-select: none;
+      margin-right: auto;
     }
     #menu-toggle:hover {
       background-color: #D2BF37;
       color: black;
     }
-    /* Navigation menu hidden by default */
     nav {
       display: none;
       flex-direction: column;
-      position: fixed;
+      align-items: flex-start;
+      position: absolute;
       top: 60px;
-      left: 15px;
+      left: 1rem;
       background: black;
-      border: 2px solid #D2BF37;
+      border: 1px solid #D2BF37;
+      padding: 0.5rem 1rem;
       border-radius: 0.5rem;
-      padding: 1rem;
-      z-index: 120;
-      min-width: 160px;
     }
     nav.active {
       display: flex;
@@ -112,474 +82,149 @@
     nav a {
       color: #D2BF37;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.875rem;
       text-decoration: none;
-      margin: 0.5rem 0;
+      margin: 0.3rem 0;
       cursor: pointer;
       transition: color 0.3s ease;
     }
-    nav a:hover {
-      color: #fff159;
+    nav a:hover { color: #fff159; }
+    @media (min-width: 640px) {
+      nav { flex-direction: row; position: static; background: none; padding: 0; border: none; }
+      nav a { display: inline-block; margin: 0 1rem; }
     }
-    /* Front page text */
-    #frontpage {
-      min-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      z-index: 10;
-      position: relative;
-      padding: 3rem 1rem;
-    }
-    #frontpage h1 {
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-      font-size: 4rem;
-      margin-bottom: 0.3rem;
-    }
-    #frontpage h2 {
-      font-family: Arial, sans-serif;
-      font-size: 1.6rem;
-      max-width: 600px;
-      font-weight: 600;
-      margin-bottom: 1.2rem;
-      color: #D2BF37;
-    }
-    #frontpage a.explore-btn {
-      background-color: #D2BF37;
-      color: black;
-      padding: 0.75rem 2rem;
-      border-radius: 9999px;
-      font-weight: 700;
-      box-shadow: 0 0 8px #D2BF37;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
-    }
-    #frontpage a.explore-btn:hover {
-      background-color: #c9b02e;
-      box-shadow: 0 0 15px #c9b02e;
-    }
-    /* Serving globally section */
-    #serving-globally {
-      text-align: center;
-      margin-top: 1rem;
-      opacity: 0.9;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-    #serving-globally p {
-      font-weight: 600;
-      opacity: 0.8;
-      max-width: 700px;
-      margin: 0.8rem auto 1.2rem;
-    }
-    #serving-globally a {
-      background-color: transparent;
-      border: 2px solid #D2BF37;
-      color: #D2BF37;
-      padding: 0.6rem 1.8rem;
-      border-radius: 9999px;
-      font-weight: 700;
-      box-shadow: none;
-      transition: background-color 0.4s ease, color 0.4s ease;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    #serving-globally a:hover {
-      background-color: #D2BF37;
-      color: black;
-      box-shadow: 0 0 8px #D2BF37;
-    }
-    /* Sections spacing */
     section {
       padding: 4rem 1rem;
       max-width: 1100px;
-      margin: 0 auto 4rem;
+      margin: 0 auto;
       position: relative;
       z-index: 10;
     }
-    /* Services Section */
-    #services h3 {
-      text-align: center;
-      font-size: 2.5rem;
+    section + section { margin-top: 5rem; }
+    section h3 {
+      font-size: 2.2rem;
       font-weight: 700;
+      text-align: center;
       margin-bottom: 2rem;
     }
-    #services .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-      gap: 1.5rem;
-    }
-    #services .service-card {
-      background: transparent;
+    .service-card {
       border: 2px solid #D2BF37;
-      padding: 1.5rem;
+      padding: 1rem;
       border-radius: 1rem;
       color: #D2BF37;
       text-align: center;
-      position: relative;
-      box-shadow: none;
       transition: box-shadow 0.3s ease;
-      cursor: default;
-      user-select: none;
-    }
-    #services .service-card:hover {
-      box-shadow: 0 0 15px #D2BF37;
-    }
-    #services .service-card h4 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    #services button.details-btn {
-      background: transparent;
-      border: none;
-      color: #D2BF37;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: underline;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-    #services button.details-btn:hover {
-      color: #fff159;
-    }
-    /* Modal styles */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-      z-index: 200;
-    }
-    .modal.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .modal-content {
-      background: rgba(210,191,55,0.15);
-      border: 2px solid #D2BF37;
-      box-shadow: 0 0 20px #D2BF37;
-      padding: 2rem 2.5rem;
-      border-radius: 1rem;
-      color: #D2BF37;
-      max-width: 420px;
-      text-align: center;
-      font-weight: 600;
-      position: relative;
-      user-select: none;
-    }
-    .modal-content h4 {
-      margin-bottom: 1rem;
-      font-weight: 900;
-      font-size: 1.6rem;
-      font-family: 'Cinzel', serif;
-    }
-    .modal-content p {
-      font-size: 1rem;
-      line-height: 1.4;
       margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .modal-content button.close-btn {
-      background: transparent;
-      border: 2px solid #D2BF37;
-      padding: 0.5rem 1.5rem;
-      border-radius: 9999px;
-      color: #D2BF37;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    .modal-content button.close-btn:hover {
-      background-color: #D2BF37;
-      color: black;
-    }
-    /* Appreciation section */
-    #appreciation {
-      border: 2px solid #D2BF37;
-      background: transparent !important;
-      padding: 3rem 2rem;
-      border-radius: 1rem;
-      max-width: 900px;
-      margin: 0 auto 4rem;
-      user-select: none;
-    }
-    #appreciation h3 {
-      font-weight: 700;
-      font-size: 2.3rem;
-      margin-bottom: 2rem;
-      text-align: center;
-      color: #D2BF37;
-    }
-    #appreciation blockquote {
-      border-left: 3px solid #D2BF37;
-      padding-left: 1rem;
-      margin-bottom: 1.5rem;
-      font-style: italic;
-      opacity: 0.9;
-      user-select: text;
-    }
-    #appreciation cite {
-      font-weight: 700;
-      display: block;
-      margin-top: 0.4rem;
-      color: #D2BF37;
-      user-select: text;
-    }
-    /* About Section */
-    #about {
-      max-width: 800px;
-      margin: 0 auto 4rem;
-      color: #D2BF37;
-    }
-    #about h3 {
-      font-weight: 700;
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-    #about p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 1.2rem;
-      text-align: center;
-    }
-    #about blockquote {
-      font-style: italic;
-      font-weight: 600;
-      max-width: 650px;
-      margin: 2rem auto 0;
-      text-align: center;
-      user-select: text;
-    }
-    #about blockquote span {
-      display: block;
-      margin-top: 0.8rem;
-      font-weight: 900;
-    }
-    /* Contact Section */
-    #contact {
-      max-width: 600px;
-      margin: 0 auto 4rem;
-    }
-    #contact h3 {
-      font-weight: 700;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      color: #D2BF37;
-    }
-    #contact form input,
-    #contact form textarea {
+    .service-card:hover { box-shadow: 0 0 15px #D2BF37; }
+    form input,
+    form textarea {
       width: 100%;
-      padding: 0.8rem 1rem;
-      border-radius: 0.5rem;
-      border: 1.5px solid #D2BF37;
+      margin-bottom: 0.5rem;
+      padding: 0.3rem 0.5rem;
       background: black;
+      border: 1.5px solid #D2BF37;
       color: #D2BF37;
-      font-weight: 600;
-      margin-bottom: 1.2rem;
-      font-size: 1rem;
-      resize: vertical;
-      transition: border-color 0.3s ease;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
     }
-    #contact form input:focus,
-    #contact form textarea:focus {
-      border-color: #fff159;
-      outline: none;
+    form button {
+      padding: 0.5rem 1.5rem;
+      border: 2px solid #D2BF37;
+      background: none;
+      color: #D2BF37;
+      border-radius: 9999px;
+      font-weight: 700;
+      cursor: pointer;
     }
-    #contact form button {
+    form button:hover {
       background-color: #D2BF37;
       color: black;
-      padding: 0.75rem 2rem;
-      font-weight: 700;
-      border-radius: 9999px;
-      cursor: pointer;
-      border: none;
-      transition: background-color 0.3s ease;
-    }
-    #contact form button:hover {
-      background-color: #c9b02e;
     }
   </style>
 </head>
 <body>
-
   <header>
     <button id="menu-toggle">MAWTIF</button>
-    <nav id="main-menu" aria-label="Main navigation">
+    <nav id="main-menu">
       <a href="#frontpage">Home</a>
       <a href="#services">Our Services</a>
-      <a href="#appreciation">Our Appreciation</a>
+      <a href="#appreciation">Appreciation</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
-
-  <div id="sticky-brand">MAWTIF</div>
   <div class="shadow-logo"></div>
 
-  <!-- Front Page -->
-  <section id="frontpage" class="transition-smooth">
-    <h1 class="float-anim">MAWTIF HR</h1>
-    <h2 class="float-anim">Global HR Expertise, Tailored For You</h2>
-    <div id="serving-globally" class="float-anim">
-      <p>
-        Proudly partnering with organizations in UAE, Bangladesh, India, Sri Lanka, Europe, Nepal & Bhutan — because exceptional HR knows no borders.
-      </p>
-      <a href="#services" class="explore-btn">Start Global HR Journey</a>
+  <section id="frontpage">
+    <h1 class="float-anim glow-spark" style="font-size: 4rem; text-align: center; margin-bottom: 0.5rem;">MAWTIF HR</h1>
+    <h2 class="float-anim" style="text-align: center; font-size: 1.5rem;">Global HR Expertise, Tailored For You</h2>
+    <div style="text-align: center; margin-top: 1.5rem;">
+      <p style="margin-bottom: 1rem; max-width: 700px; margin-left:auto; margin-right:auto;">Proudly partnering with organizations in UAE, Bangladesh, India, Sri Lanka, Europe, Nepal & Bhutan — because exceptional HR knows no borders.</p>
+      <a href="#services" style="padding: 0.6rem 2rem; border: 2px solid #D2BF37; border-radius: 9999px; color: #D2BF37; text-decoration: none; font-weight: 700;">Explore Services</a>
     </div>
   </section>
 
-  <!-- Services Page -->
   <section id="services">
     <h3>Our Services</h3>
-    <div class="services-grid">
-      <div class="service-card">
-        <h4>Talent Acquisition</h4>
-        <button class="details-btn" onclick="toggleModal('modal1')">Details</button>
-      </div>
-      <div class="service-card">
-        <h4>Training & Development</h4>
-        <button class="details-btn" onclick="toggleModal('modal2')">Details</button>
-      </div>
-      <div class="service-card">
-        <h4>OD & Talent Management</h4>
-        <button class="details-btn" onclick="toggleModal('modal3')">Details</button>
-      </div>
-      <div class="service-card">
-        <h4>Total Reward</h4>
-        <button class="details-btn" onclick="toggleModal('modal4')">Details</button>
-      </div>
-      <div class="service-card">
-        <h4>Policy & Compliance</h4>
-        <button class="details-btn" onclick="toggleModal('modal5')">Details</button>
-      </div>
-    </div>
+    <div class="service-card">Talent Acquisition — Align hiring with vision using structured, global-grade methods.</div>
+    <div class="service-card">Training & Development — Empower teams with skill-building and leadership coaching.</div>
+    <div class="service-card">OD & Talent Management — Structure teams and build pipelines for scale.</div>
+    <div class="service-card">Total Reward — Design compelling benefits, equity, and incentive programs.</div>
+    <div class="service-card">Policy & Compliance — Build clarity and alignment across countries and laws.</div>
   </section>
 
-  <!-- Appreciation Page -->
   <section id="appreciation">
-    <h3>Our Appreciation</h3>
-    <blockquote>
-      "MAWTIF HR helped us build a people-first culture that drives results."
-      <cite>— CEO, Fintech Startup</cite>
-    </blockquote>
-    <blockquote>
-      "With MAWTIF, our DEI strategy became more than a buzzword — it became impact."
-      <cite>— Global Director, Fortune 500</cite>
-    </blockquote>
-    <blockquote>
-      "Policy alignment, leadership readiness, and org growth — MAWTIF delivered on all fronts."
-      <cite>— Head of People, MNC Logistics</cite>
-    </blockquote>
+    <h3>Client Appreciation</h3>
+    <blockquote style="text-align: center; font-style: italic; max-width:700px; margin:auto;">"MAWTIF HR helped us build a people-first culture that drives results."</blockquote>
+    <blockquote style="text-align: center; font-style: italic; max-width:700px; margin:auto;">"With MAWTIF, our DEI strategy became more than a buzzword — it became impact."</blockquote>
+    <blockquote style="text-align: center; font-style: italic; max-width:700px; margin:auto;">"Policy alignment, leadership readiness, and org growth — MAWTIF delivered on all fronts."</blockquote>
+    <blockquote style="text-align: center; font-style: italic; max-width:700px; margin:auto;">"MAWTIF empowered our HR to act globally while staying legally compliant locally. Brilliant blend."</blockquote>
+    <blockquote style="text-align: center; font-style: italic; max-width:700px; margin:auto;">"Exceptional support from MAWTIF HR during our expansion into South Asia. Highly recommended."</blockquote>
   </section>
 
-  <!-- About Page -->
   <section id="about">
     <h3>About MAWTIF HR</h3>
-    <p>
-      MAWTIF HR is a bold, global HR consultancy founded on real industry insight. We specialize in strategic talent acquisition, OD, DEI, compliance, and reward systems built for scale. Our advisory helps global firms localize smartly — combining regulatory compliance with people-centric innovation.
-    </p>
-    <p>
-      Our team draws from top leadership roles across tech, logistics, and finance sectors — empowering you with data-driven recruitment, policy clarity, leadership pipelines, and sustainable HR infrastructure.
-    </p>
-    <blockquote>
-      “As the Founder & CEO of MAWTIF, I believe in building cultures that are not only compliant, but courageous. Our approach integrates local sensitivity with global structure. We don't just design policies — we shape the future of work.”
-      <span>— Founder & CEO, MAWTIF HR</span>
-    </blockquote>
+    <p style="text-align:center; max-width: 800px; margin: auto;">MAWTIF HR is a bold, global HR consultancy founded on real industry insight. We specialize in strategic talent acquisition, OD, DEI, compliance, and reward systems built for scale. Our advisory helps global firms localize smartly — combining regulatory compliance with people-centric innovation.</p>
+    <p style="text-align:center; max-width: 800px; margin: auto;">Our team draws from top leadership roles across tech, logistics, and finance sectors — empowering you with data-driven recruitment, policy clarity, leadership pipelines, and sustainable HR infrastructure.</p>
+    <blockquote style="text-align:center; margin-top: 2rem; font-style: italic;">“As the Founder & CEO of MAWTIF, I believe in building cultures that are not only compliant, but courageous.”<br><span style="display: block; font-weight: bold;">— Founder & CEO</span></blockquote>
   </section>
 
-  <!-- Contact Page -->
   <section id="contact">
     <h3>Contact Us</h3>
     <form>
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="4" required></textarea>
       <button type="submit">Send Message</button>
     </form>
   </section>
 
-  <!-- Modals -->
-  <div id="modal1" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal1-title">
-      <h4 id="modal1-title">Talent Acquisition</h4>
-      <p>We align your hiring with business vision through structured, data-driven recruitment solutions.</p>
-      <button class="close-btn" onclick="toggleModal('modal1')">Close</button>
-    </div>
-  </div>
-  <div id="modal2" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal2-title">
-      <h4 id="modal2-title">Training & Development</h4>
-      <p>Upskill your workforce with custom programs, leadership sessions, and digital learning ecosystems.</p>
-      <button class="close-btn" onclick="toggleModal('modal2')">Close</button>
-    </div>
-  </div>
-  <div id="modal3" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal3-title">
-      <h4 id="modal3-title">OD & Talent Management</h4>
-      <p>We design organization-wide structures, workforce models, and succession strategies that scale.</p>
-      <button class="close-btn" onclick="toggleModal('modal3')">Close</button>
-    </div>
-  </div>
-  <div id="modal4" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal4-title">
-      <h4 id="modal4-title">Total Reward</h4>
-      <p>Designing global-grade compensation, incentives, and flexible benefits policies with ROI focus.</p>
-      <button class="close-btn" onclick="toggleModal('modal4')">Close</button>
-    </div>
-  </div>
-  <div id="modal5" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal5-title">
-      <h4 id="modal5-title">Policy & Compliance</h4>
-      <p>Our policy frameworks align legal standards with dynamic, values-driven workplace practices.</p>
-      <button class="close-btn" onclick="toggleModal('modal5')">Close</button>
-    </div>
-  </div>
-
   <script>
-    // Sticky brand appear on scroll past frontpage
-    const stickyBrand = document.getElementById('sticky-brand');
-    const frontpage = document.getElementById('frontpage');
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('main-menu');
+    menuToggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
 
-    window.addEventListener('scroll', () => {
-      const frontpageBottom = frontpage.getBoundingClientRect().bottom;
-      if (frontpageBottom < 50) {
-        stickyBrand.classList.add('visible');
-      } else {
-        stickyBrand.classList.remove('visible');
+    let wheelTriggered = false;
+    window.addEventListener('wheel', () => {
+      if (!wheelTriggered) {
+        menu.classList.add('active');
+        wheelTriggered = true;
+        setTimeout(() => { wheelTriggered = false; }, 1500);
       }
     });
 
-    // Modal toggle logic
-    function toggleModal(id) {
-      const modal = document.getElementById(id);
-      if (!modal) return;
-      const isActive = modal.classList.contains('active');
-      if (isActive) {
-        modal.classList.remove('active');
-        modal.setAttribute('aria-hidden', 'true');
-      } else {
-        modal.classList.add('active');
-        modal.setAttribute('aria-hidden', 'false');
-      }
-    }
-
-    // Menu toggle logic
-    const menuToggleBtn = document.getElementById('menu-toggle');
-    const mainMenu = document.getElementById('main-menu');
-    menuToggleBtn.addEventListener('click', () => {
-      mainMenu.classList.toggle('active');
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('active');
+      });
     });
   </script>
-
 </body>
 </html>
