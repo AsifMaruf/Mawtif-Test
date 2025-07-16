@@ -5,38 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="MAWTIF HR - Global HR Consultancy" />
   <title>MAWTIF</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    /* Fonts and base */
+    html { scroll-behavior: smooth; }
     body {
       background-color: #000;
       color: #D2BF37;
-      font-family: 'Cinzel', serif;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+      margin: 0; padding: 0;
     }
-    /* Float animation */
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
+    .cinzel {
+      font-family: 'Cinzel', serif !important;
     }
-    .float-anim {
-      animation: float 3s ease-in-out infinite;
-    }
-    /* Glow spark */
-    .glow-spark {
-      text-shadow: 0 0 6px #D2BF37, 0 0 12px #D2BF37;
-      animation: spark-glow 1.5s ease-in-out infinite alternate;
-    }
+
+    /* Glow animation */
     @keyframes spark-glow {
       from { text-shadow: 0 0 6px #D2BF37, 0 0 12px #D2BF37; }
       to { text-shadow: 0 0 10px #fff159, 0 0 20px #fff159; }
     }
-    /* Large background watermark */
+    .glow-spark {
+      animation: spark-glow 1.5s ease-in-out infinite alternate;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Large background shadow logo */
     .shadow-logo::before {
       content: "MAWTIF";
       position: fixed;
@@ -51,208 +45,241 @@
       z-index: 0;
       pointer-events: none;
     }
-    /* Header & Menu */
+
+    /* Header and menu button */
     header {
-      background-color: black;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: black;
       padding: 1rem;
+      z-index: 150;
       display: flex;
-      justify-content: flex-start;
       align-items: center;
+      user-select: none;
     }
     #menu-toggle {
-      background: none;
-      border: 2px solid #D2BF37;
-      color: #D2BF37;
       font-family: 'Cinzel', serif;
-      font-size: 1rem;
-      padding: 0.4rem 1.2rem;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #D2BF37;
+      border: 2px solid #D2BF37;
       border-radius: 9999px;
+      background: transparent;
+      padding: 0.4rem 1.2rem;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      margin-left: 1rem;
       user-select: none;
-      z-index: 150;
-      position: relative;
+    }
+    #menu-toggle.glow-spark {
+      animation: spark-glow 1.5s ease-in-out infinite alternate;
+      box-shadow: 0 0 10px #D2BF37, 0 0 20px #fff159;
     }
     #menu-toggle:hover {
       background-color: #D2BF37;
       color: black;
     }
+
+    /* Navigation */
     nav {
       position: fixed;
-      top: 60px; /* below header */
+      top: 4.5rem;
       left: 1rem;
-      background: rgba(0,0,0,0.95);
-      border: 2px solid #D2BF37;
-      border-radius: 1rem;
-      display: flex;
+      background: black;
+      border: 1.8px solid #D2BF37;
+      border-radius: 0.5rem;
+      padding: 0.8rem 1.2rem;
+      display: none;
       flex-direction: column;
-      padding: 1rem 1.5rem;
-      gap: 1rem;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      max-width: 200px;
-      z-index: 140;
+      gap: 0.75rem;
+      z-index: 160;
       user-select: none;
+      max-width: 220px;
     }
     nav.active {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
+      display: flex;
     }
     nav a {
       color: #D2BF37;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 1rem;
       text-decoration: none;
       cursor: pointer;
+      padding: 0.2rem 0.3rem;
+      border-radius: 0.25rem;
       transition: color 0.3s ease;
-      user-select: none;
     }
     nav a:hover {
       color: #fff159;
+      background: rgba(210, 191, 55, 0.1);
     }
-    /* Responsive: nav becomes horizontal on wider screens */
-    @media (min-width: 640px) {
-      nav {
-        position: static;
-        flex-direction: row;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        transform: none !important;
-        background: none;
-        border: none;
-        padding: 0;
-        max-width: none;
-      }
-      nav a {
-        margin-left: 1.5rem;
-      }
-      #menu-toggle {
-        display: none;
-      }
-    }
+
     /* Sections */
     section {
-      padding: 4rem 1rem;
       max-width: 1100px;
-      margin: 0 auto 3rem auto;
+      margin: 5rem auto 6rem;
+      padding: 3rem 1rem;
       position: relative;
       z-index: 10;
     }
+    section + section {
+      margin-top: 9rem;
+    }
     section h3 {
-      font-size: 2.2rem;
+      font-family: 'Cinzel', serif;
+      font-size: 2.3rem;
       font-weight: 700;
       text-align: center;
       margin-bottom: 2rem;
+      user-select: none;
     }
-    /* Front page styles */
-    #frontpage h1 {
-      font-size: 4rem;
-      font-weight: 900;
+
+    /* Frontpage */
+    #frontpage {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      margin-bottom: 0.5rem;
+      user-select: none;
+      padding-top: 6rem;
+    }
+    #frontpage h1 {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 4.5rem;
+      margin: 0 0 0.3rem 0;
+      color: #D2BF37;
+      text-shadow: 0 0 8px #D2BF37;
+      animation: spark-glow 1.5s ease-in-out infinite alternate;
     }
     #frontpage h2 {
       font-size: 1.5rem;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    #frontpage p {
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-      margin-bottom: 1rem;
+      max-width: 650px;
       font-weight: 600;
+      margin: 0 0 2rem 0;
+      color: #fff159;
     }
-    #frontpage a.explore-btn {
-      display: inline-block;
-      padding: 0.6rem 2rem;
-      border: 2px solid #D2BF37;
-      border-radius: 9999px;
+    #serving-globally p {
+      font-weight: 600;
+      max-width: 700px;
+      margin: 0 auto 2rem;
       color: #D2BF37;
+      opacity: 0.85;
+      user-select: none;
+    }
+    #serving-globally a.explore-btn {
+      display: inline-block;
+      background: transparent;
+      border: 2px solid #D2BF37;
+      color: #D2BF37;
+      padding: 0.6rem 2rem;
+      border-radius: 9999px;
       font-weight: 700;
       text-decoration: none;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px #D2BF37;
       user-select: none;
     }
-    #frontpage a.explore-btn:hover {
-      background-color: #D2BF37;
+    #serving-globally a.explore-btn:hover {
+      background: #D2BF37;
       color: black;
-      box-shadow: 0 0 10px #D2BF37;
+      box-shadow: 0 0 16px #D2BF37;
     }
-    /* Service buttons (like original) */
+
+    /* Service cards */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 1.6rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
     .service-card {
       border: 2px solid #D2BF37;
-      background: transparent;
-      color: #D2BF37;
       border-radius: 1rem;
-      padding: 0.7rem 1.2rem;
-      font-weight: 700;
-      font-size: 0.85rem;
+      padding: 1.2rem 1rem 1.4rem 1rem;
       text-align: center;
-      cursor: pointer;
-      max-width: 320px;
-      margin: 0.7rem auto;
+      color: #D2BF37;
+      transition: box-shadow 0.3s ease;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: default;
       user-select: none;
-      box-shadow: none;
-      transition: box-shadow 0.3s ease, background-color 0.3s ease;
-      outline: 2px solid transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .service-card:hover,
-    .service-card:focus {
-      box-shadow: 0 0 15px #D2BF37;
-      background-color: rgba(210,191,55,0.15);
-      outline: 2px solid #fff159;
+    .service-card:hover {
+      box-shadow: 0 0 20px #D2BF37;
     }
+    .service-card h4 {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    button.details-btn {
+      margin-top: auto;
+      background: transparent;
+      border: none;
+      color: #D2BF37;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: underline;
+      user-select: none;
+      padding: 0.3rem 0;
+      transition: color 0.3s ease;
+    }
+    button.details-btn:hover {
+      color: #fff159;
+    }
+
     /* Modals */
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.85);
       display: flex;
       justify-content: center;
       align-items: center;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s ease;
-      z-index: 200;
-      user-select: none;
+      z-index: 300;
     }
     .modal.active {
       opacity: 1;
       pointer-events: auto;
     }
     .modal-content {
-      background: rgba(210,191,55,0.15);
+      background: rgba(210, 191, 55, 0.15);
       border: 2px solid #D2BF37;
       box-shadow: 0 0 20px #D2BF37;
       padding: 2rem 2.5rem;
       border-radius: 1rem;
       color: #D2BF37;
-      max-width: 420px;
+      max-width: 440px;
       text-align: center;
       font-weight: 600;
+      user-select: none;
       position: relative;
-      user-select: text;
     }
     .modal-content h4 {
-      margin-bottom: 1rem;
-      font-weight: 900;
-      font-size: 1.6rem;
       font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 1.7rem;
+      margin-bottom: 1.2rem;
     }
     .modal-content p {
       font-size: 1rem;
       line-height: 1.4;
       margin-bottom: 1.5rem;
     }
-    .modal-content button.close-btn {
+    button.close-btn {
       background: transparent;
       border: 2px solid #D2BF37;
       padding: 0.5rem 1.5rem;
@@ -263,236 +290,421 @@
       transition: background-color 0.3s ease, color 0.3s ease;
       user-select: none;
     }
-    .modal-content button.close-btn:hover {
+    button.close-btn:hover {
       background-color: #D2BF37;
       color: black;
     }
-    /* Appreciation quotes */
+
+    /* Appreciation Section */
+    #appreciation {
+      max-width: 900px;
+      margin: 0 auto 8rem;
+      border: 2px solid #D2BF37;
+      border-radius: 1rem;
+      padding: 3rem 2rem;
+      user-select: none;
+      color: #D2BF37;
+    }
+    #appreciation h3 {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 2.6rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
     #appreciation blockquote {
       font-style: italic;
-      max-width: 700px;
-      margin: 1.5rem auto;
-      text-align: center;
-      color: #D2BF37;
+      font-weight: 600;
+      border-left: 3px solid #D2BF37;
+      padding-left: 1rem;
+      margin-bottom: 1.8rem;
+      user-select: text;
+      opacity: 0.9;
+    }
+    #appreciation cite {
+      display: block;
+      font-weight: 700;
+      margin-top: 0.4rem;
       user-select: text;
     }
-    #appreciation blockquote + blockquote {
-      margin-top: 2rem;
+
+    /* About Section */
+    #about {
+      max-width: 850px;
+      margin: 0 auto 6rem;
+      color: #D2BF37;
+      user-select: none;
     }
-    /* About */
-    #about p {
-      max-width: 800px;
-      margin: 0 auto 1.2rem auto;
+    #about h3 {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 1.8rem;
       text-align: center;
-      font-weight: 600;
+    }
+    #about p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      text-align: center;
     }
     #about blockquote {
       font-style: italic;
       font-weight: 600;
-      max-width: 650px;
-      margin: 2rem auto 0 auto;
+      max-width: 680px;
+      margin: 2rem auto 0;
       text-align: center;
       user-select: text;
+      opacity: 0.95;
     }
     #about blockquote span {
       display: block;
-      margin-top: 0.8rem;
+      margin-top: 0.6rem;
       font-weight: 900;
     }
-    /* Contact form fields compact */
-    form input,
-    form textarea {
+
+    /* Contact Section */
+    #contact {
+      max-width: 600px;
+      margin: 0 auto 6rem;
+      user-select: none;
+    }
+    #contact h3 {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #D2BF37;
+    }
+    #contact form input,
+    #contact form textarea {
       width: 100%;
-      margin-bottom: 0.5rem;
-      padding: 0.4rem 0.6rem;
-      background: black;
+      padding: 0.3rem 0.5rem;
+      font-size: 0.85rem;
       border: 1.5px solid #D2BF37;
+      background: black;
       color: #D2BF37;
       border-radius: 0.5rem;
-      font-size: 0.75rem;
       font-weight: 600;
-      user-select: text;
+      margin-bottom: 0.7rem;
       resize: vertical;
+      transition: border-color 0.3s ease;
     }
-    form button {
-      padding: 0.5rem 1.5rem;
+    #contact form input:focus,
+    #contact form textarea:focus {
+      border-color: #fff159;
+      outline: none;
+    }
+    #contact form button {
+      width: auto;
+      padding: 0.5rem 1.8rem;
+      background: transparent;
       border: 2px solid #D2BF37;
-      background: none;
       color: #D2BF37;
-      border-radius: 9999px;
       font-weight: 700;
+      border-radius: 9999px;
       cursor: pointer;
-      user-select: none;
       transition: background-color 0.3s ease;
+      user-select: none;
     }
-    form button:hover {
+    #contact form button:hover {
       background-color: #D2BF37;
       color: black;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      #menu-toggle {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.8rem;
+        margin-left: 0.5rem;
+      }
+      nav {
+        left: 0.5rem;
+        top: 3.8rem;
+        max-width: 180px;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      section {
+        margin: 4rem auto 5rem;
+        padding: 2.5rem 1rem;
+      }
+      #frontpage h1 {
+        font-size: 3rem;
+      }
+      #frontpage h2 {
+        font-size: 1.1rem;
+        max-width: 300px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <button id="menu-toggle" aria-expanded="false" aria-controls="main-menu">MAWTIF</button>
-    <nav id="main-menu" role="navigation" aria-label="Primary menu">
-      <a href="#frontpage" tabindex="0">Home</a>
-      <a href="#services" tabindex="0">Our Services</a>
-      <a href="#appreciation" tabindex="0">Appreciation</a>
-      <a href="#about" tabindex="0">About</a>
-      <a href="#contact" tabindex="0">Contact</a>
-    </nav>
-  </header>
+<header>
+  <button id="menu-toggle" class="glow-spark cinzel" aria-expanded="false" aria-controls="primary-menu" aria-label="Toggle menu">
+    MAWTIF
+  </button>
+  <nav id="primary-menu" role="navigation" aria-label="Primary menu" tabindex="-1">
+    <a href="#frontpage" tabindex="0">Home</a>
+    <a href="#services" tabindex="0">Our Services</a>
+    <a href="#appreciation" tabindex="0">Our Appreciation</a>
+    <a href="#about" tabindex="0">About</a>
+    <a href="#contact" tabindex="0">Contact</a>
+  </nav>
+</header>
 
-  <div class="shadow-logo"></div>
+<div class="shadow-logo"></div>
 
-  <section id="frontpage">
-    <h1 class="float-anim glow-spark">MAWTIF HR</h1>
-    <h2 class="float-anim">Global HR Expertise, Tailored For You</h2>
-    <p>Proudly partnering with organizations in UAE, Bangladesh, India, Sri Lanka, Europe, Nepal & Bhutan — because exceptional HR knows no borders.</p>
-    <a href="#services" class="explore-btn">Explore Services</a>
-  </section>
+<!-- Front Page -->
+<section id="frontpage" tabindex="-1">
+  <h1 class="cinzel glow-spark">MAWTIF HR</h1>
+  <h2>Global HR Expertise, Tailored For You</h2>
+  <div id="serving-globally">
+    <p>
+      Proudly partnering with organizations in UAE, Bangladesh, India, Sri Lanka, Europe, Nepal &amp; Bhutan — because exceptional HR knows no borders.
+    </p>
+    <a href="#services" class="explore-btn">Start Global HR Journey</a>
+  </div>
+</section>
 
-  <section id="services">
-    <h3>Our Services</h3>
-    <button class="service-card" type="button" aria-haspopup="dialog" aria-controls="modal1" onclick="toggleModal('modal1')">Talent Acquisition</button>
-    <button class="service-card" type="button" aria-haspopup="dialog" aria-controls="modal2" onclick="toggleModal('modal2')">Training & Development</button>
-    <button class="service-card" type="button" aria-haspopup="dialog" aria-controls="modal3" onclick="toggleModal('modal3')">OD & Talent Management</button>
-    <button class="service-card" type="button" aria-haspopup="dialog" aria-controls="modal4" onclick="toggleModal('modal4')">Total Reward</button>
-    <button class="service-card" type="button" aria-haspopup="dialog" aria-controls="modal5" onclick="toggleModal('modal5')">Policy & Compliance</button>
-  </section>
-
-  <section id="appreciation">
-    <h3>Client Appreciation</h3>
-    <blockquote>"MAWTIF HR helped us build a people-first culture that drives results."</blockquote>
-    <blockquote>"With MAWTIF, our DEI strategy became more than a buzzword — it became impact."</blockquote>
-    <blockquote>"Policy alignment, leadership readiness, and org growth — MAWTIF delivered on all fronts."</blockquote>
-    <blockquote>"Their insight and responsiveness helped us stay ahead in complex markets."</blockquote>
-    <blockquote>"MAWTIF’s approach is strategic, compassionate, and results-driven."</blockquote>
-  </section>
-
-  <section id="about">
-    <h3>About MAWTIF HR</h3>
-    <p>MAWTIF HR is a bold, global HR consultancy founded on real industry insight. We specialize in strategic talent acquisition, OD, DEI, compliance, and reward systems built for scale. Our advisory helps global firms localize smartly — combining regulatory compliance with people-centric innovation.</p>
-    <p>Our team draws from top leadership roles across tech, logistics, and finance sectors — empowering you with data-driven recruitment, policy clarity, leadership pipelines, and sustainable HR infrastructure.</p>
-    <blockquote>“As the Founder & CEO of MAWTIF, I believe in building cultures that are not only compliant, but courageous.”<br><span>— Founder & CEO</span></blockquote>
-  </section>
-
-  <section id="contact">
-    <h3>Contact Us</h3>
-    <form>
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Your Message" rows="4" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-
-  <!-- Modals -->
-  <div id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal1-title" tabindex="-1">
-    <div class="modal-content">
-      <h4 id="modal1-title">Talent Acquisition</h4>
-      <p>We align your hiring with business vision through structured, data-driven recruitment solutions.</p>
-      <button class="close-btn" onclick="toggleModal('modal1')">Close</button>
+<!-- Services -->
+<section id="services" tabindex="-1">
+  <h3>Our Services</h3>
+  <div class="services-grid">
+    <div class="service-card">
+      <h4>Talent Acquisition</h4>
+      <p>Global sourcing and recruiting the right talent across multiple regions with speed and accuracy.</p>
+      <button class="details-btn" data-modal="modal-talent">Learn More</button>
+    </div>
+    <div class="service-card">
+      <h4>HR Policy & Compliance</h4>
+      <p>Developing robust policies aligned with international standards to ensure legal compliance.</p>
+      <button class="details-btn" data-modal="modal-policy">Learn More</button>
+    </div>
+    <div class="service-card">
+      <h4>Performance Management</h4>
+      <p>Designing metric-driven evaluation frameworks to boost workforce productivity and morale.</p>
+      <button class="details-btn" data-modal="modal-performance">Learn More</button>
+    </div>
+    <div class="service-card">
+      <h4>Learning & Development</h4>
+      <p>Curating customized L&D programs that empower employees to upskill and grow professionally.</p>
+      <button class="details-btn" data-modal="modal-ld">Learn More</button>
+    </div>
+    <div class="service-card">
+      <h4>Compensation & Benefits</h4>
+      <p>Strategic planning of remuneration and benefits to attract and retain top talent globally.</p>
+      <button class="details-btn" data-modal="modal-compensation">Learn More</button>
+    </div>
+    <div class="service-card">
+      <h4>HR Technology & Analytics</h4>
+      <p>Leveraging cutting-edge HR tech and data analytics to streamline processes and decision making.</p>
+      <button class="details-btn" data-modal="modal-hrtech">Learn More</button>
     </div>
   </div>
-  <div id="modal2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal2-title" tabindex="-1">
-    <div class="modal-content">
-      <h4 id="modal2-title">Training & Development</h4>
-      <p>Upskill your workforce with custom programs, leadership sessions, and digital learning ecosystems.</p>
-      <button class="close-btn" onclick="toggleModal('modal2')">Close</button>
-    </div>
+</section>
+
+<!-- Appreciation -->
+<section id="appreciation" tabindex="-1">
+  <h3>Client Appreciation</h3>
+  <blockquote>
+    "MAWTIF HR transformed our recruitment process, delivering quality hires faster than ever."
+    <cite>— CEO, Global Fintech Startup</cite>
+  </blockquote>
+  <blockquote>
+    "Their compliance guidance saved us from costly legal pitfalls across multiple countries."
+    <cite>— HR Director, Multinational Corporation</cite>
+  </blockquote>
+  <blockquote>
+    "Performance management frameworks designed by MAWTIF HR have boosted our team’s productivity by 30%."
+    <cite>— COO, Leading E-commerce Platform</cite>
+  </blockquote>
+  <blockquote>
+    "Their L&D programs helped our staff develop key skills, improving retention rates."
+    <cite>— Talent Manager, Tech Unicorn</cite>
+  </blockquote>
+  <blockquote>
+    "Compensation strategies from MAWTIF HR made us competitive in a tough global market."
+    <cite>— CFO, Global Manufacturing Firm</cite>
+  </blockquote>
+  <blockquote>
+    "The HR analytics solutions provided crucial insights driving better decisions."
+    <cite>— CTO, AI Research Company</cite>
+  </blockquote>
+</section>
+
+<!-- About -->
+<section id="about" tabindex="-1">
+  <h3>About MAWTIF HR</h3>
+  <p>
+    At MAWTIF HR, we deliver world-class human resource solutions tailored to diverse global markets.
+    Our expertise spans cross-border compliance, talent management, and digital HR transformation.
+  </p>
+  <p>
+    We combine royal heritage inspiration with modern innovation to empower your workforce, wherever you operate.
+  </p>
+  <blockquote>
+    "Our mission is to make global HR seamless, strategic, and impactful."
+    <span>— Asif Maruf, Founder & CEO</span>
+  </blockquote>
+</section>
+
+<!-- Contact -->
+<section id="contact" tabindex="-1">
+  <h3>Contact Us</h3>
+  <form id="contact-form" autocomplete="off" novalidate>
+    <input type="text" name="name" placeholder="Your Name" required minlength="2" />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <input type="tel" name="phone" placeholder="Phone Number" />
+    <textarea name="message" placeholder="Your Message" rows="4" required minlength="10"></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<!-- Modals -->
+<div id="modal-talent" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-talent-title" tabindex="-1">
+  <div class="modal-content">
+    <h4 id="modal-talent-title">Talent Acquisition</h4>
+    <p>We source, screen, and hire top talent globally with efficiency and accuracy to fit your business needs.</p>
+    <button class="close-btn" aria-label="Close Talent Acquisition modal">Close</button>
   </div>
-  <div id="modal3" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal3-title" tabindex="-1">
-    <div class="modal-content">
-      <h4 id="modal3-title">OD & Talent Management</h4>
-      <p>We design organization-wide structures, workforce models, and succession strategies that scale.</p>
-      <button class="close-btn" onclick="toggleModal('modal3')">Close</button>
-    </div>
+</div>
+<div id="modal-policy" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-policy-title" tabindex="-1">
+  <div class="modal-content">
+    <h4 id="modal-policy-title">HR Policy & Compliance</h4>
+    <p>We develop comprehensive HR policies ensuring your organization complies with international and local labor laws.</p>
+    <button class="close-btn" aria-label="Close HR Policy modal">Close</button>
   </div>
-  <div id="modal4" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal4-title" tabindex="-1">
-    <div class="modal-content">
-      <h4 id="modal4-title">Total Reward</h4>
-      <p>Designing global-grade compensation, incentives, and flexible benefits policies with ROI focus.</p>
-      <button class="close-btn" onclick="toggleModal('modal4')">Close</button>
-    </div>
+</div>
+<div id="modal-performance" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-performance-title" tabindex="-1">
+  <div class="modal-content">
+    <h4 id="modal-performance-title">Performance Management</h4>
+    <p>Our frameworks enhance employee productivity and engagement through data-driven performance evaluations.</p>
+    <button class="close-btn" aria-label="Close Performance Management modal">Close</button>
   </div>
-  <div id="modal5" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal5-title" tabindex="-1">
-    <div class="modal-content">
-      <h4 id="modal5-title">Policy & Compliance</h4>
-      <p>Our policy frameworks align legal standards with dynamic, values-driven workplace practices.</p>
-      <button class="close-btn" onclick="toggleModal('modal5')">Close</button>
-    </div>
+</div>
+<div id="modal-ld" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-ld-title" tabindex="-1">
+  <div class="modal-content">
+    <h4 id="modal-ld-title">Learning & Development</h4>
+    <p>Customized learning programs to upskill your workforce and foster continuous growth.</p>
+    <button class="close-btn" aria-label="Close Learning & Development modal">Close</button>
   </div>
+</div>
+<div id="modal-compensation" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-compensation-title" tabindex="-1">
+  <div class="modal-content">
+    <h4 id="modal-compensation-title">Compensation & Benefits</h4>
+    <p>Strategic planning for competitive compensation packages that attract and retain talent worldwide.</p>
+    <button class="close-btn" aria-label="Close Compensation modal">Close</button>
+  </div>
+</div>
+<div id="modal-hrtech" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-hrtech-title" tabindex="-1">
+  <div class="modal-content">
+    <h4 id="modal-hrtech-title">HR Technology & Analytics</h4>
+    <p>Harnessing data and innovative technology to optimize HR operations and decision-making.</p>
+    <button class="close-btn" aria-label="Close HR Technology modal">Close</button>
+  </div>
+</div>
 
-  <script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('main-menu');
-    let wheelTriggered = false;
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const navMenu = document.getElementById('primary-menu');
 
-    menuToggle.addEventListener('click', () => {
-      if (menu.classList.contains('active')) {
-        menu.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      } else {
-        menu.classList.add('active');
-        menuToggle.setAttribute('aria-expanded', 'true');
-      }
-    });
-
-    // Smooth wheel-triggered menu open (only once)
-    window.addEventListener('wheel', event => {
-      if (!wheelTriggered && event.deltaY > 20) { // detect meaningful downward wheel scroll
-        menu.classList.add('active');
-        menuToggle.setAttribute('aria-expanded', 'true');
-        wheelTriggered = true;
-      }
-    }, { passive: true });
-
-    // Close menu when clicking on any nav link
-    menu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    // Modal toggle function
-    function toggleModal(id) {
-      const modal = document.getElementById(id);
-      const isActive = modal.classList.contains('active');
-      if (isActive) {
-        modal.classList.remove('active');
-        modal.setAttribute('aria-hidden', 'true');
-        modal.querySelector('.close-btn').focus();
-      } else {
-        // Close all modals first
-        document.querySelectorAll('.modal.active').forEach(m => {
-          m.classList.remove('active');
-          m.setAttribute('aria-hidden', 'true');
-        });
-        modal.classList.add('active');
-        modal.setAttribute('aria-hidden', 'false');
-        modal.querySelector('.close-btn').focus();
-      }
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    if (!expanded) {
+      navMenu.classList.add('active');
+      menuToggle.classList.add('glow-spark');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      navMenu.focus();
+    } else {
+      navMenu.classList.remove('active');
+      menuToggle.classList.remove('glow-spark');
+      menuToggle.setAttribute('aria-expanded', 'false');
     }
+  });
 
-    // Close modal when clicking outside modal-content or pressing Escape
-    document.querySelectorAll('.modal').forEach(modal => {
-      modal.addEventListener('click', e => {
-        if (e.target === modal) {
-          toggleModal(modal.id);
+  // Close menu on link click
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      menuToggle.classList.remove('glow-spark');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.focus();
+    });
+  });
+
+  // Modal handling
+  const modals = document.querySelectorAll('.modal');
+  const detailButtons = document.querySelectorAll('.details-btn');
+  const closeButtons = document.querySelectorAll('.close-btn');
+
+  detailButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modalId = btn.getAttribute('data-modal');
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('active');
+        modal.focus();
+      }
+    });
+  });
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.modal');
+      if (modal) {
+        modal.classList.remove('active');
+        menuToggle.focus();
+      }
+    });
+  });
+
+  // Close modal on outside click or ESC
+  modals.forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        menuToggle.focus();
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") {
+      modals.forEach(modal => {
+        if (modal.classList.contains('active')) {
+          modal.classList.remove('active');
+          menuToggle.focus();
         }
       });
-    });
+    }
+  });
 
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        document.querySelectorAll('.modal.active').forEach(modal => {
-          toggleModal(modal.id);
+  // Smooth scroll offset fix for fixed header
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetID = this.getAttribute('href').substring(1);
+      const targetSection = document.getElementById(targetID);
+      if (targetSection) {
+        const offset = 70; // header height + margin
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = targetSection.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
         });
       }
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
