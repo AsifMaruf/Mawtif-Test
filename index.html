@@ -30,6 +30,15 @@
       user-select: none;
     }
 
+    /* Floating animation for frontpage h1 */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .float-anim {
+      animation: float 3s ease-in-out infinite;
+    }
+
     /* Large background shadow logo */
     .shadow-logo::before {
       content: "MAWTIF";
@@ -154,6 +163,12 @@
       color: #D2BF37;
       text-shadow: 0 0 8px #D2BF37;
       animation: spark-glow 1.5s ease-in-out infinite alternate;
+      /* Added float animation */
+      animation-name: spark-glow, float;
+      animation-duration: 1.5s, 3s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      animation-direction: alternate;
     }
     #frontpage h2 {
       font-size: 1.5rem;
@@ -413,298 +428,199 @@
       color: black;
     }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      #menu-toggle {
-        font-size: 0.9rem;
-        padding: 0.3rem 0.8rem;
-        margin-left: 0.5rem;
-      }
-      nav {
-        left: 0.5rem;
-        top: 3.8rem;
-        max-width: 180px;
-      }
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-      section {
-        margin: 4rem auto 5rem;
-        padding: 2.5rem 1rem;
-      }
-      #frontpage h1 {
-        font-size: 3rem;
-      }
-      #frontpage h2 {
-        font-size: 1.1rem;
-        max-width: 300px;
-      }
+    /* Footer */
+    footer#footer {
+      text-align: center;
+      padding: 1rem 0;
+      color: #D2BF37;
+      font-size: 0.9rem;
+      user-select: none;
+      border-top: 1px solid rgba(210, 191, 55, 0.3);
+      margin-top: 4rem;
+      background: #000;
+      font-weight: 600;
     }
   </style>
 </head>
-<body>
+<body class="shadow-logo">
+  <header>
+    <button id="menu-toggle" class="glow-spark cinzel" aria-expanded="false" aria-controls="nav-menu">MAWTIF</button>
+  </header>
 
-<header>
-  <button id="menu-toggle" class="glow-spark cinzel" aria-expanded="false" aria-controls="primary-menu" aria-label="Toggle menu">
-    MAWTIF
-  </button>
-  <nav id="primary-menu" role="navigation" aria-label="Primary menu" tabindex="-1">
-    <a href="#frontpage" tabindex="0">Home</a>
-    <a href="#services" tabindex="0">Our Services</a>
-    <a href="#appreciation" tabindex="0">Our Appreciation</a>
-    <a href="#about" tabindex="0">About</a>
-    <a href="#contact" tabindex="0">Contact</a>
+  <nav id="nav-menu" role="navigation" aria-label="Primary Navigation">
+    <a href="#frontpage">Home</a>
+    <a href="#services">Services</a>
+    <a href="#appreciation">Appreciation</a>
+    <a href="#about">About Us</a>
+    <a href="#contact">Contact</a>
   </nav>
-</header>
 
-<div class="shadow-logo"></div>
+  <main>
+    <section id="frontpage" aria-label="Front Page">
+      <h1 class="float-anim">MAWTIF HR</h1>
+      <h2>Global HR Expertise — Serving Globally</h2>
+      <div id="serving-globally">
+        <p>Delivering premium HR consulting services worldwide with unmatched professionalism and dedication.</p>
+        <a href="#services" class="explore-btn glow-spark" aria-label="Explore Our Services">Explore Services</a>
+      </div>
+    </section>
 
-<!-- Front Page -->
-<section id="frontpage" tabindex="-1">
-  <h1 class="cinzel glow-spark">MAWTIF HR</h1>
-  <h2>Global HR Expertise, Tailored For You</h2>
-  <div id="serving-globally">
-    <p>
-      Proudly partnering with organizations in UAE, Bangladesh, India, Sri Lanka, Europe, Nepal &amp; Bhutan — because exceptional HR knows no borders.
-    </p>
-    <a href="#services" class="explore-btn">Start Global HR Journey</a>
-  </div>
-</section>
+    <section id="services" aria-label="Our Services">
+      <h3>Our Services</h3>
+      <div class="services-grid">
+        <article class="service-card">
+          <h4>Talent Acquisition</h4>
+          <p>End-to-end recruitment and selection to build your best team.</p>
+          <button class="details-btn" aria-expanded="false" aria-controls="modal-talent">Learn More</button>
+        </article>
+        <article class="service-card">
+          <h4>HR Strategy</h4>
+          <p>Custom HR planning aligned with your business goals.</p>
+          <button class="details-btn" aria-expanded="false" aria-controls="modal-strategy">Learn More</button>
+        </article>
+        <article class="service-card">
+          <h4>Performance Management</h4>
+          <p>Design and implementation of KPI frameworks and reviews.</p>
+          <button class="details-btn" aria-expanded="false" aria-controls="modal-performance">Learn More</button>
+        </article>
+        <article class="service-card">
+          <h4>Employee Relations</h4>
+          <p>Effective conflict resolution and employee engagement plans.</p>
+          <button class="details-btn" aria-expanded="false" aria-controls="modal-relations">Learn More</button>
+        </article>
+      </div>
+    </section>
 
-<!-- Services -->
-<section id="services" tabindex="-1">
-  <h3>Our Services</h3>
-  <div class="services-grid">
-    <div class="service-card">
-      <h4>Talent Acquisition</h4>
-      <p>Global sourcing and recruiting the right talent across multiple regions with speed and accuracy.</p>
-      <button class="details-btn" data-modal="modal-talent">Learn More</button>
+    <section id="appreciation" aria-label="Appreciation">
+      <h3>Appreciation</h3>
+      <blockquote>
+        "MAWTIF HR transformed our talent pipeline and strengthened our global workforce culture."
+        <cite>– CEO, GlobalTech Solutions</cite>
+      </blockquote>
+      <blockquote>
+        "Professional, insightful, and dedicated HR partners who truly understand our needs."
+        <cite>– HR Director, FinServe International</cite>
+      </blockquote>
+    </section>
+
+    <section id="about" aria-label="About Us">
+      <h3>About Us</h3>
+      <p>At MAWTIF HR, our vision is to empower global organizations with innovative, strategic HR solutions that drive sustainable growth and culture transformation.</p>
+      <p>We combine deep industry experience with cutting-edge technology and personalized service to meet the evolving needs of our clients worldwide.</p>
+      <blockquote>
+        "Our commitment to excellence and global reach makes us your trusted HR partner."
+        <span>– MAWTIF HR Team</span>
+      </blockquote>
+    </section>
+
+    <section id="contact" aria-label="Contact">
+      <h3>Contact</h3>
+      <form>
+        <input type="text" name="name" placeholder="Your Name" required aria-required="true" />
+        <input type="email" name="email" placeholder="Your Email" required aria-required="true" />
+        <textarea name="message" rows="4" placeholder="Your Message" required aria-required="true"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Modals for services -->
+  <div id="modal-talent" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-talent-title" aria-hidden="true" tabindex="-1">
+    <div class="modal-content">
+      <h4 id="modal-talent-title">Talent Acquisition</h4>
+      <p>We provide tailored recruitment strategies ensuring you get the right talent at the right time, aligned with your company culture and goals.</p>
+      <button class="close-btn" aria-label="Close Talent Acquisition Details">Close</button>
     </div>
-    <div class="service-card">
-      <h4>HR Policy & Compliance</h4>
-      <p>Developing robust policies aligned with international standards to ensure legal compliance.</p>
-      <button class="details-btn" data-modal="modal-policy">Learn More</button>
-    </div>
-    <div class="service-card">
-      <h4>Performance Management</h4>
-      <p>Designing metric-driven evaluation frameworks to boost workforce productivity and morale.</p>
-      <button class="details-btn" data-modal="modal-performance">Learn More</button>
-    </div>
-    <div class="service-card">
-      <h4>Learning & Development</h4>
-      <p>Curating customized L&D programs that empower employees to upskill and grow professionally.</p>
-      <button class="details-btn" data-modal="modal-ld">Learn More</button>
-    </div>
-    <div class="service-card">
-      <h4>Compensation & Benefits</h4>
-      <p>Strategic planning of remuneration and benefits to attract and retain top talent globally.</p>
-      <button class="details-btn" data-modal="modal-compensation">Learn More</button>
-    </div>
-    <div class="service-card">
-      <h4>HR Technology & Analytics</h4>
-      <p>Leveraging cutting-edge HR tech and data analytics to streamline processes and decision making.</p>
-      <button class="details-btn" data-modal="modal-hrtech">Learn More</button>
+  </div>
+  <div id="modal-strategy" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-strategy-title" aria-hidden="true" tabindex="-1">
+    <div class="modal-content">
+      <h4 id="modal-strategy-title">HR Strategy</h4>
+      <p>Strategic HR planning that aligns with your business vision, creating actionable roadmaps for sustainable growth and competitive advantage.</p>
+      <button class="close-btn" aria-label="Close HR Strategy Details">Close</button>
     </div>
   </div>
-</section>
-
-<!-- Appreciation -->
-<section id="appreciation" tabindex="-1">
-  <h3>Client Appreciation</h3>
-  <blockquote>
-    "MAWTIF HR transformed our recruitment process, delivering quality hires faster than ever."
-    <cite>— CEO, Global Fintech Startup</cite>
-  </blockquote>
-  <blockquote>
-    "Their compliance guidance saved us from costly legal pitfalls across multiple countries."
-    <cite>— HR Director, Multinational Corporation</cite>
-  </blockquote>
-  <blockquote>
-    "Performance management frameworks designed by MAWTIF HR have boosted our team’s productivity by 30%."
-    <cite>— COO, Leading E-commerce Platform</cite>
-  </blockquote>
-  <blockquote>
-    "Their L&D programs helped our staff develop key skills, improving retention rates."
-    <cite>— Talent Manager, Tech Unicorn</cite>
-  </blockquote>
-  <blockquote>
-    "Compensation strategies from MAWTIF HR made us competitive in a tough global market."
-    <cite>— CFO, Global Manufacturing Firm</cite>
-  </blockquote>
-  <blockquote>
-    "The HR analytics solutions provided crucial insights driving better decisions."
-    <cite>— CTO, AI Research Company</cite>
-  </blockquote>
-</section>
-
-<!-- About -->
-<section id="about" tabindex="-1">
-  <h3>About MAWTIF HR</h3>
-  <p>
-    At MAWTIF HR, we deliver world-class human resource solutions tailored to diverse global markets.
-    Our expertise spans cross-border compliance, talent management, and digital HR transformation.
-  </p>
-  <p>
-    We combine royal heritage inspiration with modern innovation to empower your workforce, wherever you operate.
-  </p>
-  <blockquote>
-    "Our mission is to make global HR seamless, strategic, and impactful."
-    <span>— Asif Maruf, Founder & CEO</span>
-  </blockquote>
-</section>
-
-<!-- Contact -->
-<section id="contact" tabindex="-1">
-  <h3>Contact Us</h3>
-  <form id="contact-form" autocomplete="off" novalidate>
-    <input type="text" name="name" placeholder="Your Name" required minlength="2" />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <input type="tel" name="phone" placeholder="Phone Number" />
-    <textarea name="message" placeholder="Your Message" rows="4" required minlength="10"></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-</section>
-
-<!-- Modals -->
-<div id="modal-talent" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-talent-title" tabindex="-1">
-  <div class="modal-content">
-    <h4 id="modal-talent-title">Talent Acquisition</h4>
-    <p>We source, screen, and hire top talent globally with efficiency and accuracy to fit your business needs.</p>
-    <button class="close-btn" aria-label="Close Talent Acquisition modal">Close</button>
+  <div id="modal-performance" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-performance-title" aria-hidden="true" tabindex="-1">
+    <div class="modal-content">
+      <h4 id="modal-performance-title">Performance Management</h4>
+      <p>We help design effective performance frameworks, KPIs, and review processes to boost productivity and employee engagement.</p>
+      <button class="close-btn" aria-label="Close Performance Management Details">Close</button>
+    </div>
   </div>
-</div>
-<div id="modal-policy" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-policy-title" tabindex="-1">
-  <div class="modal-content">
-    <h4 id="modal-policy-title">HR Policy & Compliance</h4>
-    <p>We develop comprehensive HR policies ensuring your organization complies with international and local labor laws.</p>
-    <button class="close-btn" aria-label="Close HR Policy modal">Close</button>
+  <div id="modal-relations" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-relations-title" aria-hidden="true" tabindex="-1">
+    <div class="modal-content">
+      <h4 id="modal-relations-title">Employee Relations</h4>
+      <p>Our expertise ensures harmonious workplace relations, conflict resolution, and effective employee engagement strategies.</p>
+      <button class="close-btn" aria-label="Close Employee Relations Details">Close</button>
+    </div>
   </div>
-</div>
-<div id="modal-performance" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-performance-title" tabindex="-1">
-  <div class="modal-content">
-    <h4 id="modal-performance-title">Performance Management</h4>
-    <p>Our frameworks enhance employee productivity and engagement through data-driven performance evaluations.</p>
-    <button class="close-btn" aria-label="Close Performance Management modal">Close</button>
-  </div>
-</div>
-<div id="modal-ld" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-ld-title" tabindex="-1">
-  <div class="modal-content">
-    <h4 id="modal-ld-title">Learning & Development</h4>
-    <p>Customized learning programs to upskill your workforce and foster continuous growth.</p>
-    <button class="close-btn" aria-label="Close Learning & Development modal">Close</button>
-  </div>
-</div>
-<div id="modal-compensation" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-compensation-title" tabindex="-1">
-  <div class="modal-content">
-    <h4 id="modal-compensation-title">Compensation & Benefits</h4>
-    <p>Strategic planning for competitive compensation packages that attract and retain talent worldwide.</p>
-    <button class="close-btn" aria-label="Close Compensation modal">Close</button>
-  </div>
-</div>
-<div id="modal-hrtech" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-hrtech-title" tabindex="-1">
-  <div class="modal-content">
-    <h4 id="modal-hrtech-title">HR Technology & Analytics</h4>
-    <p>Harnessing data and innovative technology to optimize HR operations and decision-making.</p>
-    <button class="close-btn" aria-label="Close HR Technology modal">Close</button>
-  </div>
-</div>
 
-<script>
-  const menuToggle = document.getElementById('menu-toggle');
-  const navMenu = document.getElementById('primary-menu');
+  <footer id="footer" role="contentinfo">
+    &copy; 2025 MAWTIF HR. All rights reserved.
+  </footer>
 
-  menuToggle.addEventListener('click', () => {
-    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-    if (!expanded) {
-      navMenu.classList.add('active');
-      menuToggle.classList.add('glow-spark');
-      menuToggle.setAttribute('aria-expanded', 'true');
-      navMenu.focus();
-    } else {
-      navMenu.classList.remove('active');
-      menuToggle.classList.remove('glow-spark');
-      menuToggle.setAttribute('aria-expanded', 'false');
-    }
-  });
+  <script>
+    // Menu toggle logic
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
 
-  // Close menu on link click
-  navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('active');
-      menuToggle.classList.remove('glow-spark');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.focus();
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+      menuToggle.setAttribute('aria-expanded', !expanded);
+      navMenu.classList.toggle('active');
     });
-  });
 
-  // Modal handling
-  const modals = document.querySelectorAll('.modal');
-  const detailButtons = document.querySelectorAll('.details-btn');
-  const closeButtons = document.querySelectorAll('.close-btn');
+    // Close nav on link click
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
 
-  detailButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const modalId = btn.getAttribute('data-modal');
-      const modal = document.getElementById(modalId);
-      if (modal) {
+    // Modal logic
+    const detailButtons = document.querySelectorAll('button.details-btn');
+    const modals = document.querySelectorAll('.modal');
+    const closeButtons = document.querySelectorAll('button.close-btn');
+
+    detailButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const modalId = btn.getAttribute('aria-controls');
+        const modal = document.getElementById(modalId);
         modal.classList.add('active');
-        modal.focus();
-      }
+        modal.setAttribute('aria-hidden', 'false');
+        modal.querySelector('button.close-btn').focus();
+      });
     });
-  });
 
-  closeButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const modal = btn.closest('.modal');
-      if (modal) {
+    closeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const modal = btn.closest('.modal');
         modal.classList.remove('active');
-        menuToggle.focus();
-      }
+        modal.setAttribute('aria-hidden', 'true');
+      });
     });
-  });
 
-  // Close modal on outside click or ESC
-  modals.forEach(modal => {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('active');
-        menuToggle.focus();
-      }
-    });
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape") {
-      modals.forEach(modal => {
-        if (modal.classList.contains('active')) {
+    // Close modal on outside click
+    modals.forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
           modal.classList.remove('active');
-          menuToggle.focus();
+          modal.setAttribute('aria-hidden', 'true');
         }
       });
-    }
-  });
+    });
 
-  // Smooth scroll offset fix for fixed header
-  document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetID = this.getAttribute('href').substring(1);
-      const targetSection = document.getElementById(targetID);
-      if (targetSection) {
-        const offset = 70; // header height + margin
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = targetSection.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
+    // Accessibility: close modal on Escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modals.forEach(modal => {
+          if (modal.classList.contains('active')) {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+          }
         });
       }
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
