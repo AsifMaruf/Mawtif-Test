@@ -30,15 +30,6 @@
       user-select: none;
     }
 
-    /* Floating animation for frontpage h1 */
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    .float-anim {
-      animation: float 3s ease-in-out infinite;
-    }
-
     /* Large background shadow logo */
     .shadow-logo::before {
       content: "MAWTIF";
@@ -131,6 +122,12 @@
       padding: 4rem 1rem;
       position: relative;
       z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 80vh;
     }
     section + section {
       margin-top: 9rem;
@@ -146,13 +143,6 @@
 
     /* Frontpage */
     #frontpage {
-      min-height: 80vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      user-select: none;
       padding-top: 6rem;
     }
     #frontpage h1 {
@@ -163,12 +153,6 @@
       color: #D2BF37;
       text-shadow: 0 0 8px #D2BF37;
       animation: spark-glow 1.5s ease-in-out infinite alternate;
-      /* Added float animation */
-      animation-name: spark-glow, float;
-      animation-duration: 1.5s, 3s;
-      animation-iteration-count: infinite;
-      animation-timing-function: ease-in-out;
-      animation-direction: alternate;
     }
     #frontpage h2 {
       font-size: 1.5rem;
@@ -429,198 +413,210 @@
     }
 
     /* Footer */
-    footer#footer {
+    footer {
+      border-top: 1.5px solid #D2BF37;
+      padding: 1.5rem 0;
       text-align: center;
-      padding: 1rem 0;
       color: #D2BF37;
       font-size: 0.9rem;
       user-select: none;
-      border-top: 1px solid rgba(210, 191, 55, 0.3);
-      margin-top: 4rem;
-      background: #000;
       font-weight: 600;
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      #menu-toggle {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.8rem;
+        margin-left: 0.5rem;
+      }
+      nav {
+        left: 0.5rem;
+        top: 3.8rem;
+        max-width: 180px;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      section {
+        margin: 4rem auto 5rem;
+        padding: 2.5rem 1rem;
+      }
+      #frontpage h1 {
+        font-size: 3rem;
+      }
+      #frontpage h2 {
+        font-size: 1.1rem;
+        max-width: 300px;
+      }
     }
   </style>
 </head>
-<body class="shadow-logo">
-  <header>
-    <button id="menu-toggle" class="glow-spark cinzel" aria-expanded="false" aria-controls="nav-menu">MAWTIF</button>
-  </header>
+<body>
 
-  <nav id="nav-menu" role="navigation" aria-label="Primary Navigation">
+<header>
+  <button id="menu-toggle" class="glow-spark cinzel" aria-expanded="false" aria-controls="primary-menu" aria-label="Toggle menu">
+    MAWTIF
+  </button>
+  <nav id="primary-menu" role="navigation" aria-label="Primary menu">
     <a href="#frontpage">Home</a>
     <a href="#services">Services</a>
     <a href="#appreciation">Appreciation</a>
-    <a href="#about">About Us</a>
+    <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
+</header>
 
-  <main>
-    <section id="frontpage" aria-label="Front Page">
-      <h1 class="float-anim">MAWTIF HR</h1>
-      <h2>Global HR Expertise — Serving Globally</h2>
-      <div id="serving-globally">
-        <p>Delivering premium HR consulting services worldwide with unmatched professionalism and dedication.</p>
-        <a href="#services" class="explore-btn glow-spark" aria-label="Explore Our Services">Explore Services</a>
+<div class="shadow-logo"></div>
+
+<main>
+  <section id="frontpage" aria-label="Front page">
+    <h1 class="cinzel glow-spark" tabindex="0">MAWTIF HR</h1>
+    <h2 tabindex="0">Global HR Expertise for Your Success</h2>
+
+    <div id="serving-globally">
+      <p tabindex="0">Serving clients worldwide with expert HR solutions tailored to your unique needs.</p>
+      <a href="#services" class="explore-btn glow-spark" role="button" tabindex="0">Explore Services</a>
+    </div>
+  </section>
+
+  <section id="services" aria-label="Services">
+    <h3 class="cinzel" tabindex="0">Our Services</h3>
+    <div class="services-grid">
+      <div class="service-card" tabindex="0">
+        <h4>Talent Acquisition</h4>
+        <p>Comprehensive recruitment strategies tailored to your industry and business goals.</p>
+        <button class="details-btn" data-modal="modal1" aria-haspopup="dialog" aria-controls="modal1" aria-expanded="false">Details</button>
       </div>
-    </section>
-
-    <section id="services" aria-label="Our Services">
-      <h3>Our Services</h3>
-      <div class="services-grid">
-        <article class="service-card">
-          <h4>Talent Acquisition</h4>
-          <p>End-to-end recruitment and selection to build your best team.</p>
-          <button class="details-btn" aria-expanded="false" aria-controls="modal-talent">Learn More</button>
-        </article>
-        <article class="service-card">
-          <h4>HR Strategy</h4>
-          <p>Custom HR planning aligned with your business goals.</p>
-          <button class="details-btn" aria-expanded="false" aria-controls="modal-strategy">Learn More</button>
-        </article>
-        <article class="service-card">
-          <h4>Performance Management</h4>
-          <p>Design and implementation of KPI frameworks and reviews.</p>
-          <button class="details-btn" aria-expanded="false" aria-controls="modal-performance">Learn More</button>
-        </article>
-        <article class="service-card">
-          <h4>Employee Relations</h4>
-          <p>Effective conflict resolution and employee engagement plans.</p>
-          <button class="details-btn" aria-expanded="false" aria-controls="modal-relations">Learn More</button>
-        </article>
+      <div class="service-card" tabindex="0">
+        <h4>Performance Management</h4>
+        <p>Implementing KPIs and evaluation frameworks aligned with global fintech standards.</p>
+        <button class="details-btn" data-modal="modal2" aria-haspopup="dialog" aria-controls="modal2" aria-expanded="false">Details</button>
       </div>
-    </section>
+      <div class="service-card" tabindex="0">
+        <h4>HR Consulting</h4>
+        <p>Customized consultancy to optimize HR policies, compliance, and global workforce strategy.</p>
+        <button class="details-btn" data-modal="modal3" aria-haspopup="dialog" aria-controls="modal3" aria-expanded="false">Details</button>
+      </div>
+    </div>
+  </section>
 
-    <section id="appreciation" aria-label="Appreciation">
-      <h3>Appreciation</h3>
-      <blockquote>
-        "MAWTIF HR transformed our talent pipeline and strengthened our global workforce culture."
-        <cite>– CEO, GlobalTech Solutions</cite>
-      </blockquote>
-      <blockquote>
-        "Professional, insightful, and dedicated HR partners who truly understand our needs."
-        <cite>– HR Director, FinServe International</cite>
-      </blockquote>
-    </section>
-
-    <section id="about" aria-label="About Us">
-      <h3>About Us</h3>
-      <p>At MAWTIF HR, our vision is to empower global organizations with innovative, strategic HR solutions that drive sustainable growth and culture transformation.</p>
-      <p>We combine deep industry experience with cutting-edge technology and personalized service to meet the evolving needs of our clients worldwide.</p>
-      <blockquote>
-        "Our commitment to excellence and global reach makes us your trusted HR partner."
-        <span>– MAWTIF HR Team</span>
-      </blockquote>
-    </section>
-
-    <section id="contact" aria-label="Contact">
-      <h3>Contact</h3>
-      <form>
-        <input type="text" name="name" placeholder="Your Name" required aria-required="true" />
-        <input type="email" name="email" placeholder="Your Email" required aria-required="true" />
-        <textarea name="message" rows="4" placeholder="Your Message" required aria-required="true"></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </section>
-  </main>
-
-  <!-- Modals for services -->
-  <div id="modal-talent" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-talent-title" aria-hidden="true" tabindex="-1">
+  <!-- Modals -->
+  <div id="modal1" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal1-title" tabindex="-1">
     <div class="modal-content">
-      <h4 id="modal-talent-title">Talent Acquisition</h4>
-      <p>We provide tailored recruitment strategies ensuring you get the right talent at the right time, aligned with your company culture and goals.</p>
+      <h4 id="modal1-title">Talent Acquisition Details</h4>
+      <p>We offer end-to-end recruitment solutions including sourcing, screening, and onboarding.</p>
       <button class="close-btn" aria-label="Close Talent Acquisition Details">Close</button>
     </div>
   </div>
-  <div id="modal-strategy" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-strategy-title" aria-hidden="true" tabindex="-1">
+  <div id="modal2" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal2-title" tabindex="-1">
     <div class="modal-content">
-      <h4 id="modal-strategy-title">HR Strategy</h4>
-      <p>Strategic HR planning that aligns with your business vision, creating actionable roadmaps for sustainable growth and competitive advantage.</p>
-      <button class="close-btn" aria-label="Close HR Strategy Details">Close</button>
-    </div>
-  </div>
-  <div id="modal-performance" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-performance-title" aria-hidden="true" tabindex="-1">
-    <div class="modal-content">
-      <h4 id="modal-performance-title">Performance Management</h4>
-      <p>We help design effective performance frameworks, KPIs, and review processes to boost productivity and employee engagement.</p>
+      <h4 id="modal2-title">Performance Management Details</h4>
+      <p>Develop KPIs and frameworks to ensure measurable and behaviorally specific evaluations.</p>
       <button class="close-btn" aria-label="Close Performance Management Details">Close</button>
     </div>
   </div>
-  <div id="modal-relations" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-relations-title" aria-hidden="true" tabindex="-1">
+  <div id="modal3" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal3-title" tabindex="-1">
     <div class="modal-content">
-      <h4 id="modal-relations-title">Employee Relations</h4>
-      <p>Our expertise ensures harmonious workplace relations, conflict resolution, and effective employee engagement strategies.</p>
-      <button class="close-btn" aria-label="Close Employee Relations Details">Close</button>
+      <h4 id="modal3-title">HR Consulting Details</h4>
+      <p>Expert advice to align your HR policies with international compliance and business strategy.</p>
+      <button class="close-btn" aria-label="Close HR Consulting Details">Close</button>
     </div>
   </div>
 
-  <footer id="footer" role="contentinfo">
-    &copy; 2025 MAWTIF HR. All rights reserved.
-  </footer>
+  <section id="appreciation" aria-label="Appreciation">
+    <h3 class="cinzel" tabindex="0">Appreciation</h3>
+    <blockquote tabindex="0">
+      "The MAWTIF HR team has transformed our approach to HR with professionalism and global expertise."
+      <cite>- CEO, Leading Fintech Company</cite>
+    </blockquote>
+    <blockquote tabindex="0">
+      "Their strategic insights and hands-on support have been invaluable to our global expansion."
+      <cite>- HR Director, Tech Startup</cite>
+    </blockquote>
+  </section>
 
-  <script>
-    // Menu toggle logic
-    const menuToggle = document.getElementById('menu-toggle');
-    const navMenu = document.getElementById('nav-menu');
+  <section id="about" aria-label="About MAWTIF HR">
+    <h3 class="cinzel" tabindex="0">About Us</h3>
+    <p tabindex="0">MAWTIF HR is a global HR consultancy focused on delivering tailored human resource strategies and solutions for companies in dynamic and fast-scaling industries worldwide.</p>
+    <p tabindex="0">We combine traditional expertise with modern, data-driven approaches to help businesses optimize talent management and workforce performance globally.</p>
+  </section>
 
-    menuToggle.addEventListener('click', () => {
-      const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-      menuToggle.setAttribute('aria-expanded', !expanded);
-      navMenu.classList.toggle('active');
-    });
+  <section id="contact" aria-label="Contact Us">
+    <h3 class="cinzel" tabindex="0">Contact</h3>
+    <form>
+      <input type="text" name="name" placeholder="Your Name" required aria-required="true" aria-label="Your Name" />
+      <input type="email" name="email" placeholder="Your Email" required aria-required="true" aria-label="Your Email" />
+      <textarea name="message" placeholder="Your Message" rows="5" required aria-required="true" aria-label="Your Message"></textarea>
+      <button type="submit" aria-label="Send Message">Send</button>
+    </form>
+  </section>
+</main>
 
-    // Close nav on link click
-    navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
+<footer role="contentinfo">
+  &copy; 2025 MAWTIF HR. All rights reserved.
+</footer>
 
-    // Modal logic
-    const detailButtons = document.querySelectorAll('button.details-btn');
-    const modals = document.querySelectorAll('.modal');
-    const closeButtons = document.querySelectorAll('button.close-btn');
+<script>
+  // Menu toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('primary-menu');
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+    menuToggle.setAttribute('aria-expanded', !expanded);
+    nav.classList.toggle('active');
+  });
 
-    detailButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const modalId = btn.getAttribute('aria-controls');
-        const modal = document.getElementById(modalId);
+  // Modal open/close
+  const detailButtons = document.querySelectorAll('button.details-btn');
+  const modals = document.querySelectorAll('.modal');
+  const closeButtons = document.querySelectorAll('button.close-btn');
+
+  detailButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modalId = btn.getAttribute('data-modal');
+      const modal = document.getElementById(modalId);
+      if(modal) {
         modal.classList.add('active');
-        modal.setAttribute('aria-hidden', 'false');
+        btn.setAttribute('aria-expanded', 'true');
         modal.querySelector('button.close-btn').focus();
-      });
-    });
-
-    closeButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const modal = btn.closest('.modal');
-        modal.classList.remove('active');
-        modal.setAttribute('aria-hidden', 'true');
-      });
-    });
-
-    // Close modal on outside click
-    modals.forEach(modal => {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.classList.remove('active');
-          modal.setAttribute('aria-hidden', 'true');
-        }
-      });
-    });
-
-    // Accessibility: close modal on Escape
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        modals.forEach(modal => {
-          if (modal.classList.contains('active')) {
-            modal.classList.remove('active');
-            modal.setAttribute('aria-hidden', 'true');
-          }
-        });
       }
     });
-  </script>
+  });
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.modal');
+      modal.classList.remove('active');
+      // Find the button that opened this modal to reset aria-expanded
+      const openBtn = [...detailButtons].find(b => b.getAttribute('data-modal') === modal.id);
+      if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+      openBtn?.focus();
+    });
+  });
+
+  // Close modal on outside click
+  modals.forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) {
+        modal.classList.remove('active');
+        const openBtn = [...detailButtons].find(b => b.getAttribute('data-modal') === modal.id);
+        if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+        openBtn?.focus();
+      }
+    });
+  });
+
+  // Close menu on nav link click (mobile)
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
 </body>
 </html>
