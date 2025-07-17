@@ -1,458 +1,458 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="MAWTIF HR - Global HR Consultancy" />
-  <title>MAWTIF</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    /* Fonts and base */
-    html { scroll-behavior: smooth; }
-    body {
-      background-color: #000;
-      color: #D2BF37;
-      font-family: 'Inter', sans-serif;
-      margin: 0; padding: 0;
-    }
-    .cinzel {
-      font-family: 'Cinzel', serif !important;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="MAWTIF HR - Global HR Consultancy" />
+<title>MAWTIF</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  /* Fonts and base */
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #000;
+    color: #D2BF37;
+    font-family: 'Inter', sans-serif;
+    margin: 0; padding: 0;
+  }
+  .cinzel {
+    font-family: 'Cinzel', serif !important;
+  }
 
-    /* Glow animation */
-    @keyframes spark-glow {
-      from { text-shadow: 0 0 6px #D2BF37, 0 0 12px #D2BF37; }
-      to { text-shadow: 0 0 10px #fff159, 0 0 20px #fff159; }
-    }
-    .glow-spark {
-      animation: spark-glow 1.5s ease-in-out infinite alternate;
-      cursor: pointer;
-      user-select: none;
-    }
+  /* Glow animation */
+  @keyframes spark-glow {
+    0%, 100% { text-shadow: 0 0 6px #D2BF37, 0 0 12px #D2BF37; }
+    50% { text-shadow: 0 0 16px #fff159, 0 0 30px #fff159; }
+  }
+  .glow-spark {
+    animation: spark-glow 3s ease-in-out infinite;
+    cursor: default;
+    user-select: none;
+  }
 
-    /* Large background shadow logo */
-    .shadow-logo::before {
-      content: "MAWTIF";
-      position: fixed;
-      font-size: 13rem;
-      color: rgba(255, 255, 255, 0.035);
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      white-space: nowrap;
-      z-index: 0;
-      pointer-events: none;
-    }
+  /* Large background shadow logo */
+  .shadow-logo::before {
+    content: "MAWTIF";
+    position: fixed;
+    font-size: 13rem;
+    color: rgba(255, 255, 255, 0.035);
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    z-index: 0;
+    pointer-events: none;
+  }
 
-    /* Header and menu button */
-    header {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      background: black;
-      padding: 1rem;
-      z-index: 150;
-      display: flex;
-      align-items: center;
-      user-select: none;
-    }
+  /* Header and menu button */
+  header {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    background: black;
+    padding: 1rem;
+    z-index: 150;
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+  #menu-toggle {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: #D2BF37;
+    border: 2px solid #D2BF37;
+    border-radius: 9999px;
+    background: transparent;
+    padding: 0.4rem 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 1rem;
+    user-select: none;
+  }
+  #menu-toggle.glow-spark {
+    animation: spark-glow 3s ease-in-out infinite;
+    box-shadow: 0 0 10px #D2BF37, 0 0 20px #fff159;
+  }
+  #menu-toggle:hover {
+    background-color: #D2BF37;
+    color: black;
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 4.5rem;
+    left: 1rem;
+    background: black;
+    border: 1.8px solid #D2BF37;
+    border-radius: 0.5rem;
+    padding: 0.8rem 1.2rem;
+    display: none;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 160;
+    user-select: none;
+    max-width: 220px;
+  }
+  nav.active {
+    display: flex;
+  }
+  nav a {
+    color: #D2BF37;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.2rem 0.3rem;
+    border-radius: 0.25rem;
+    transition: color 0.3s ease;
+  }
+  nav a:hover {
+    color: #fff159;
+    background: rgba(210, 191, 55, 0.1);
+  }
+
+  /* Sections: vertical + horizontal center + min-height */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem;
+    position: relative;
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+  }
+  section + section {
+    margin-top: 9rem;
+  }
+
+  section h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    user-select: none;
+  }
+
+  /* Frontpage */
+  #frontpage {
+    padding-top: 6rem;
+    user-select: none;
+  }
+  #frontpage h1 {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 5rem;
+    margin: 0 0 0.3rem 0;
+    color: #D2BF37;
+    text-shadow: 0 0 8px #D2BF37;
+    animation: spark-glow 3s ease-in-out infinite;
+  }
+  #frontpage h2 {
+    font-size: 1.5rem;
+    max-width: 650px;
+    font-weight: 600;
+    margin: 0 0 2rem 0;
+    color: #fff159;
+    font-family: 'Inter', sans-serif;
+  }
+  #serving-globally p {
+    font-weight: 600;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    color: #D2BF37;
+    opacity: 0.85;
+    user-select: none;
+    font-family: 'Inter', sans-serif;
+  }
+  #serving-globally a.explore-btn {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid #D2BF37;
+    color: #D2BF37;
+    padding: 0.6rem 2rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px #D2BF37;
+    user-select: none;
+    font-family: 'Inter', sans-serif;
+  }
+  #serving-globally a.explore-btn:hover {
+    background: #D2BF37;
+    color: black;
+    box-shadow: 0 0 16px #D2BF37;
+  }
+
+  /* Service cards */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .service-card {
+    border: 2px solid #D2BF37;
+    border-radius: 1rem;
+    padding: 1.2rem 1rem 1.4rem 1rem;
+    text-align: center;
+    color: #D2BF37;
+    transition: box-shadow 0.3s ease;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: default;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .service-card:hover {
+    box-shadow: 0 0 20px #D2BF37;
+  }
+  .service-card h4 {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  button.details-btn {
+    margin-top: 0.8rem;
+    background: transparent;
+    border: 2px solid #D2BF37;
+    color: #D2BF37;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: underline;
+    user-select: none;
+    padding: 0.3rem 0;
+    transition: color 0.3s ease;
+  }
+  button.details-btn:hover {
+    color: #fff159;
+  }
+
+  /* Modals */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 300;
+  }
+  .modal.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal-content {
+    background: rgba(210, 191, 55, 0.15);
+    border: 2px solid #D2BF37;
+    box-shadow: 0 0 20px #D2BF37;
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    color: #D2BF37;
+    max-width: 440px;
+    text-align: center;
+    font-weight: 600;
+    user-select: none;
+    position: relative;
+  }
+  .modal-content h4 {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 1.7rem;
+    margin-bottom: 1.2rem;
+  }
+  .modal-content p {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+  }
+  button.close-btn {
+    background: transparent;
+    border: 2px solid #D2BF37;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    color: #D2BF37;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;
+  }
+  button.close-btn:hover {
+    background-color: #D2BF37;
+    color: black;
+  }
+
+  /* Appreciation Section */
+  #appreciation {
+    max-width: 900px;
+    margin: 0 auto 8rem;
+    border: 2px solid #D2BF37;
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    user-select: none;
+    color: #D2BF37;
+  }
+  #appreciation h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 2.6rem;
+    margin-bottom: 2rem;
+  }
+  #appreciation blockquote {
+    font-style: italic;
+    font-weight: 600;
+    border-left: 3px solid #D2BF37;
+    padding-left: 1rem;
+    margin-bottom: 1.8rem;
+    user-select: text;
+    opacity: 0.9;
+  }
+  #appreciation cite {
+    display: block;
+    font-weight: 700;
+    margin-top: 0.4rem;
+    user-select: text;
+  }
+
+  /* About Section */
+  #about {
+    max-width: 850px;
+    margin: 0 auto 6rem;
+    color: #D2BF37;
+    user-select: none;
+  }
+  #about h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 1.8rem;
+  }
+  #about p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  #about blockquote {
+    font-style: italic;
+    font-weight: 600;
+    max-width: 680px;
+    margin: 2rem auto 0;
+    text-align: center;
+    user-select: text;
+    opacity: 0.95;
+  }
+  #about blockquote span {
+    display: block;
+    margin-top: 0.6rem;
+    font-weight: 900;
+  }
+
+  /* Contact Section */
+  #contact {
+    max-width: 600px;
+    margin: 0 auto 6rem;
+    user-select: none;
+  }
+  #contact h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #D2BF37;
+  }
+  #contact form input,
+  #contact form textarea {
+    width: 100%;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.85rem;
+    border: 1.5px solid #D2BF37;
+    background: black;
+    color: #D2BF37;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+  }
+  #contact form input:focus,
+  #contact form textarea:focus {
+    border-color: #fff159;
+    outline: none;
+  }
+  #contact form button {
+    width: auto;
+    padding: 0.5rem 1.8rem;
+    background: transparent;
+    border: 2px solid #D2BF37;
+    color: #D2BF37;
+    font-weight: 700;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+  #contact form button:hover {
+    background-color: #D2BF37;
+    color: black;
+  }
+
+  /* Footer */
+  footer {
+    background: #111;
+    color: #D2BF37;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    user-select: none;
+    border-top: 1px solid #D2BF37;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
     #menu-toggle {
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-      font-size: 1.1rem;
-      color: #D2BF37;
-      border: 2px solid #D2BF37;
-      border-radius: 9999px;
-      background: transparent;
-      padding: 0.4rem 1.2rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin-left: 1rem;
-      user-select: none;
+      font-size: 0.9rem;
+      padding: 0.3rem 0.8rem;
+      margin-left: 0.5rem;
     }
-    #menu-toggle.glow-spark {
-      animation: spark-glow 1.5s ease-in-out infinite alternate;
-      box-shadow: 0 0 10px #D2BF37, 0 0 20px #fff159;
-    }
-    #menu-toggle:hover {
-      background-color: #D2BF37;
-      color: black;
-    }
-
-    /* Navigation */
     nav {
-      position: fixed;
-      top: 4.5rem;
-      left: 1rem;
-      background: black;
-      border: 1.8px solid #D2BF37;
-      border-radius: 0.5rem;
-      padding: 0.8rem 1.2rem;
-      display: none;
-      flex-direction: column;
-      gap: 0.75rem;
-      z-index: 160;
-      user-select: none;
-      max-width: 220px;
+      left: 0.5rem;
+      top: 3.8rem;
+      max-width: 180px;
     }
-    nav.active {
-      display: flex;
+    .services-grid {
+      grid-template-columns: 1fr;
     }
-    nav a {
-      color: #D2BF37;
-      font-weight: 600;
-      font-size: 1rem;
-      text-decoration: none;
-      cursor: pointer;
-      padding: 0.2rem 0.3rem;
-      border-radius: 0.25rem;
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      color: #fff159;
-      background: rgba(210, 191, 55, 0.1);
-    }
-
-    /* Sections */
     section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 4rem 1rem;
-      position: relative;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      min-height: 80vh;
-    }
-    section + section {
-      margin-top: 9rem;
-    }
-    section h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 2.3rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 2rem;
-      user-select: none;
-    }
-
-    /* Frontpage */
-    #frontpage {
-      padding-top: 6rem;
+      margin: 4rem auto 5rem;
+      padding: 2.5rem 1rem;
     }
     #frontpage h1 {
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-      font-size: 4.5rem;
-      margin: 0 0 0.3rem 0;
-      color: #D2BF37;
-      text-shadow: 0 0 8px #D2BF37;
-      animation: spark-glow 1.5s ease-in-out infinite alternate;
+      font-size: 3.5rem;
     }
     #frontpage h2 {
-      font-size: 1.5rem;
-      max-width: 650px;
-      font-weight: 600;
-      margin: 0 0 2rem 0;
-      color: #fff159;
-    }
-    #serving-globally p {
-      font-weight: 600;
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      color: #D2BF37;
-      opacity: 0.85;
-      user-select: none;
-    }
-    #serving-globally a.explore-btn {
-      display: inline-block;
-      background: transparent;
-      border: 2px solid #D2BF37;
-      color: #D2BF37;
-      padding: 0.6rem 2rem;
-      border-radius: 9999px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 8px #D2BF37;
-      user-select: none;
-    }
-    #serving-globally a.explore-btn:hover {
-      background: #D2BF37;
-      color: black;
-      box-shadow: 0 0 16px #D2BF37;
-    }
-
-    /* Service cards */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-      gap: 1.5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .service-card {
-      border: 2px solid #D2BF37;
-      border-radius: 1rem;
-      padding: 1.2rem 1rem 1.4rem 1rem;
-      text-align: center;
-      color: #D2BF37;
-      transition: box-shadow 0.3s ease;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: default;
-      user-select: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .service-card:hover {
-      box-shadow: 0 0 20px #D2BF37;
-    }
-    .service-card h4 {
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-    }
-    button.details-btn {
-      margin-top: 0.8rem;
-      background: transparent;
-      border: 2px solid #D2BF37;
-      color: #D2BF37;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      text-decoration: underline;
-      user-select: none;
-      padding: 0.3rem 0;
-      transition: color 0.3s ease;
-    }
-    button.details-btn:hover {
-      color: #fff159;
-    }
-
-    /* Modals */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-      z-index: 300;
-    }
-    .modal.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .modal-content {
-      background: rgba(210, 191, 55, 0.15);
-      border: 2px solid #D2BF37;
-      box-shadow: 0 0 20px #D2BF37;
-      padding: 2rem 2.5rem;
-      border-radius: 1rem;
-      color: #D2BF37;
-      max-width: 440px;
-      text-align: center;
-      font-weight: 600;
-      user-select: none;
-      position: relative;
-    }
-    .modal-content h4 {
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-      font-size: 1.7rem;
-      margin-bottom: 1.2rem;
-    }
-    .modal-content p {
-      font-size: 1rem;
-      line-height: 1.4;
-      margin-bottom: 1.5rem;
-    }
-    button.close-btn {
-      background: transparent;
-      border: 2px solid #D2BF37;
-      padding: 0.5rem 1.5rem;
-      border-radius: 9999px;
-      color: #D2BF37;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      user-select: none;
-    }
-    button.close-btn:hover {
-      background-color: #D2BF37;
-      color: black;
-    }
-
-    /* Appreciation Section */
-    #appreciation {
-      max-width: 900px;
-      margin: 0 auto 8rem;
-      border: 2px solid #D2BF37;
-      border-radius: 1rem;
-      padding: 3rem 2rem;
-      user-select: none;
-      color: #D2BF37;
-    }
-    #appreciation h3 {
-      font-family: 'Cinzel', serif;
-      font-weight: 700;
-      font-size: 2.6rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-    #appreciation blockquote {
-      font-style: italic;
-      font-weight: 600;
-      border-left: 3px solid #D2BF37;
-      padding-left: 1rem;
-      margin-bottom: 1.8rem;
-      user-select: text;
-      opacity: 0.9;
-    }
-    #appreciation cite {
-      display: block;
-      font-weight: 700;
-      margin-top: 0.4rem;
-      user-select: text;
-    }
-
-    /* About Section */
-    #about {
-      max-width: 850px;
-      margin: 0 auto 6rem;
-      color: #D2BF37;
-      user-select: none;
-    }
-    #about h3 {
-      font-family: 'Cinzel', serif;
-      font-weight: 700;
-      font-size: 2.5rem;
-      margin-bottom: 1.8rem;
-      text-align: center;
-    }
-    #about p {
       font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-      text-align: center;
+      max-width: 300px;
     }
-    #about blockquote {
-      font-style: italic;
-      font-weight: 600;
-      max-width: 680px;
-      margin: 2rem auto 0;
-      text-align: center;
-      user-select: text;
-      opacity: 0.95;
-    }
-    #about blockquote span {
-      display: block;
-      margin-top: 0.6rem;
-      font-weight: 900;
-    }
-
-    /* Contact Section */
-    #contact {
-      max-width: 600px;
-      margin: 0 auto 6rem;
-      user-select: none;
-    }
-    #contact h3 {
-      font-family: 'Cinzel', serif;
-      font-weight: 700;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      color: #D2BF37;
-    }
-    #contact form input,
-    #contact form textarea {
-      width: 100%;
-      padding: 0.3rem 0.5rem;
-      font-size: 0.85rem;
-      border: 1.5px solid #D2BF37;
-      background: black;
-      color: #D2BF37;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      margin-bottom: 0.7rem;
-      resize: vertical;
-      transition: border-color 0.3s ease;
-    }
-    #contact form input:focus,
-    #contact form textarea:focus {
-      border-color: #fff159;
-      outline: none;
-    }
-    #contact form button {
-      width: auto;
-      padding: 0.5rem 1.8rem;
-      background: transparent;
-      border: 2px solid #D2BF37;
-      color: #D2BF37;
-      font-weight: 700;
-      border-radius: 9999px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      user-select: none;
-    }
-    #contact form button:hover {
-      background-color: #D2BF37;
-      color: black;
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1.5px solid #D2BF37;
-      padding: 1.5rem 0;
-      text-align: center;
-      color: #D2BF37;
-      font-size: 0.9rem;
-      user-select: none;
-      font-weight: 600;
-      max-width: 1100px;
-      margin: 0 auto 2rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      #menu-toggle {
-        font-size: 0.9rem;
-        padding: 0.3rem 0.8rem;
-        margin-left: 0.5rem;
-      }
-      nav {
-        left: 0.5rem;
-        top: 3.8rem;
-        max-width: 180px;
-      }
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-      section {
-        margin: 4rem auto 5rem;
-        padding: 2.5rem 1rem;
-      }
-      #frontpage h1 {
-        font-size: 3rem;
-      }
-      #frontpage h2 {
-        font-size: 1.1rem;
-        max-width: 300px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
@@ -460,128 +460,188 @@
   <button id="menu-toggle" class="glow-spark cinzel" aria-expanded="false" aria-controls="primary-menu" aria-label="Toggle menu">
     MAWTIF
   </button>
-  <nav id="primary-menu" role="navigation" aria-label="Primary menu">
-    <a href="#frontpage">Home</a>
-    <a href="#services">Services</a>
-    <a href="#appreciation">Appreciation</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+  <nav id="primary-menu" role="navigation" aria-label="Primary menu" tabindex="-1">
+    <a href="#frontpage" tabindex="0">Home</a>
+    <a href="#services" tabindex="0">Our Services</a>
+    <a href="#appreciation" tabindex="0">Our Appreciation</a>
+    <a href="#about" tabindex="0">About</a>
+    <a href="#contact" tabindex="0">Contact</a>
   </nav>
 </header>
 
 <div class="shadow-logo"></div>
 
-<main>
-  <section id="frontpage" aria-label="Front page">
-    <h1 class="cinzel glow-spark" tabindex="0">MAWTIF HR</h1>
-    <h2 tabindex="0">Global HR Expertise for Your Success</h2>
+<!-- Front Page -->
+<section id="frontpage" tabindex="-1" aria-label="Front page introduction">
+  <h1 class="cinzel glow-spark">MAWTIF HR</h1>
+  <h2>Global HR Expertise, Tailored For You</h2>
+  <div id="serving-globally">
+    <p>
+      Proudly partnering with organizations in UAE, Bangladesh, India, Sri Lanka, Europe, Nepal &amp; Bhutan — because exceptional HR knows no borders.
+    </p>
+    <a href="#services" class="explore-btn">Start Global HR Journey</a>
+  </div>
+</section>
 
-    <div id="serving-globally">
-      <p tabindex="0">Serving clients worldwide with expert HR solutions tailored to your unique needs.</p>
-      <a href="#services" class="explore-btn glow-spark" role="button" tabindex="0">Explore Services</a>
+<!-- Services -->
+<section id="services" tabindex="-1" aria-label="Our services">
+  <h3>Our Services</h3>
+  <div class="services-grid">
+    <div class="service-card">
+      <h4>Talent Acquisition</h4>
+      <p>Global sourcing and recruiting the right talent across multiple regions with speed and accuracy.</p>
+      <button class="details-btn" data-modal="modal-talent">Learn More</button>
     </div>
-  </section>
-
-  <section id="services" aria-label="Services">
-    <h3 class="cinzel" tabindex="0">Our Services</h3>
-    <div class="services-grid">
-      <div class="service-card" tabindex="0">
-        <h4>Talent Acquisition</h4>
-        <p>Comprehensive recruitment strategies tailored to your industry and business goals.</p>
-        <button class="details-btn" data-modal="modal1" aria-haspopup="dialog" aria-controls="modal1" aria-expanded="false">Details</button>
-      </div>
-      <div class="service-card" tabindex="0">
-        <h4>Performance Management</h4>
-        <p>Implementing KPIs and evaluation frameworks aligned with global fintech standards.</p>
-        <button class="details-btn" data-modal="modal2" aria-haspopup="dialog" aria-controls="modal2" aria-expanded="false">Details</button>
-      </div>
-      <div class="service-card" tabindex="0">
-        <h4>HR Consulting</h4>
-        <p>Customized consultancy to optimize HR policies, compliance, and global workforce strategy.</p>
-        <button class="details-btn" data-modal="modal3" aria-haspopup="dialog" aria-controls="modal3" aria-expanded="false">Details</button>
-      </div>
+    <div class="service-card">
+      <h4>HR Policy & Compliance</h4>
+      <p>Developing robust policies aligned with international standards to ensure legal compliance.</p>
+      <button class="details-btn" data-modal="modal-policy">Learn More</button>
     </div>
-  </section>
-
-  <!-- Modals -->
-  <div id="modal1" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal1-title" tabindex="-1">
-    <div class="modal-content">
-      <h4 id="modal1-title">Talent Acquisition Details</h4>
-      <p>We offer end-to-end recruitment solutions including sourcing, screening, and onboarding.</p>
-      <button class="close-btn" aria-label="Close Talent Acquisition Details">Close</button>
+    <div class="service-card">
+      <h4>Performance Management</h4>
+      <p>Designing metric-driven evaluation frameworks to boost workforce productivity and morale.</p>
+      <button class="details-btn" data-modal="modal-performance">Learn More</button>
+    </div>
+    <div class="service-card">
+      <h4>Learning & Development</h4>
+      <p>Curating customized L&D programs that empower employees to upskill and grow professionally.</p>
+      <button class="details-btn" data-modal="modal-ld">Learn More</button>
+    </div>
+    <div class="service-card">
+      <h4>Compensation & Benefits</h4>
+      <p>Strategic planning of remuneration and benefits to attract and retain top talent globally.</p>
+      <button class="details-btn" data-modal="modal-compensation">Learn More</button>
+    </div>
+    <div class="service-card">
+      <h4>HR Tech & Analytics</h4>
+      <p>Leveraging latest tech solutions and analytics for data-driven HR decision making.</p>
+      <button class="details-btn" data-modal="modal-hrtech">Learn More</button>
     </div>
   </div>
-  <div id="modal2" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal2-title" tabindex="-1">
-    <div class="modal-content">
-      <h4 id="modal2-title">Performance Management Details</h4>
-      <p>Develop KPIs and frameworks to ensure measurable and behaviorally specific evaluations.</p>
-      <button class="close-btn" aria-label="Close Performance Management Details">Close</button>
-    </div>
+</section>
+
+<!-- Modals -->
+<div id="modal-talent" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-talent-title" tabindex="-1">
+  <div class="modal-content">
+    <h4 id="modal-talent-title">Talent Acquisition</h4>
+    <p>We specialize in global talent sourcing with a focus on speed, accuracy, and cultural fit.</p>
+    <button class="close-btn" aria-label="Close talent acquisition modal">Close</button>
   </div>
-  <div id="modal3" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal3-title" tabindex="-1">
-    <div class="modal-content">
-      <h4 id="modal3-title">HR Consulting Details</h4>
-      <p>Expert advice to align your HR policies with international compliance and business strategy.</p>
-      <button class="close-btn" aria-label="Close HR Consulting Details">Close</button>
-    </div>
+</div>
+<div id="modal-policy" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-policy-title" tabindex="-1">
+  <div class="modal-content">
+    <h4 id="modal-policy-title">HR Policy & Compliance</h4>
+    <p>Our policies ensure your organization complies with international labor laws and best practices.</p>
+    <button class="close-btn" aria-label="Close HR policy modal">Close</button>
   </div>
+</div>
+<div id="modal-performance" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-performance-title" tabindex="-1">
+  <div class="modal-content">
+    <h4 id="modal-performance-title">Performance Management</h4>
+    <p>Implementing data-driven performance evaluation systems to foster accountability and growth.</p>
+    <button class="close-btn" aria-label="Close performance management modal">Close</button>
+  </div>
+</div>
+<div id="modal-ld" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-ld-title" tabindex="-1">
+  <div class="modal-content">
+    <h4 id="modal-ld-title">Learning & Development</h4>
+    <p>Customized training programs designed to upskill your workforce for tomorrow’s challenges.</p>
+    <button class="close-btn" aria-label="Close learning and development modal">Close</button>
+  </div>
+</div>
+<div id="modal-compensation" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-compensation-title" tabindex="-1">
+  <div class="modal-content">
+    <h4 id="modal-compensation-title">Compensation & Benefits</h4>
+    <p>Competitive compensation packages structured to motivate and retain top talent worldwide.</p>
+    <button class="close-btn" aria-label="Close compensation modal">Close</button>
+  </div>
+</div>
+<div id="modal-hrtech" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-hrtech-title" tabindex="-1">
+  <div class="modal-content">
+    <h4 id="modal-hrtech-title">HR Tech & Analytics</h4>
+    <p>Advanced HR technology and data analytics to optimize human capital management strategies.</p>
+    <button class="close-btn" aria-label="Close HR tech modal">Close</button>
+  </div>
+</div>
 
-  <section id="appreciation" aria-label="Appreciation">
-    <h3 class="cinzel" tabindex="0">Appreciation</h3>
-    <blockquote tabindex="0">
-      "The MAWTIF HR team has transformed our approach to HR with professionalism and global expertise."
-      <cite>- CEO, Leading Fintech Company</cite>
-    </blockquote>
-    <blockquote tabindex="0">
-      "Their strategic insights and hands-on support have been invaluable to our global expansion."
-      <cite>- HR Director, Tech Startup</cite>
-    </blockquote>
-  </section>
+<!-- Appreciation Section -->
+<section id="appreciation" tabindex="-1" aria-label="Client appreciation and testimonials">
+  <h3>Our Appreciation</h3>
+  <blockquote>
+    “MAWTIF HR’s strategic guidance transformed our HR department, making global talent acquisition seamless.”
+    <cite>— CEO, GlobalTech Solutions</cite>
+  </blockquote>
+  <blockquote>
+    “Their policy and compliance expertise gave us peace of mind in multiple jurisdictions.”
+    <cite>— HR Director, FinServ Co.</cite>
+  </blockquote>
+  <blockquote>
+    “The performance management tools delivered real measurable improvements in staff productivity.”
+    <cite>— COO, Innovate Labs</cite>
+  </blockquote>
+</section>
 
-  <section id="about" aria-label="About MAWTIF HR">
-    <h3 class="cinzel" tabindex="0">About Us</h3>
-    <p tabindex="0">MAWTIF HR is a global HR consultancy focused on delivering tailored human resource strategies and solutions for companies in dynamic and fast-scaling industries worldwide.</p>
-    <p tabindex="0">We combine traditional expertise with modern, data-driven approaches to help businesses optimize talent management and workforce performance globally.</p>
-  </section>
+<!-- About Section -->
+<section id="about" tabindex="-1" aria-label="About MAWTIF HR global vision">
+  <h3>About MAWTIF HR</h3>
+  <p>
+    MAWTIF HR is dedicated to providing global, strategic, and tailored human resource solutions for ambitious organizations. 
+    Our vision is to bridge cultures and geographies through effective HR practices that empower people and businesses alike.
+  </p>
+  <p>
+    Our expertise spans multiple countries and industries, integrating best practices with local insights for maximum impact.
+  </p>
+  <blockquote>
+    “Global HR solutions that speak your language and grow your future.”
+    <span>— MAWTIF HR</span>
+  </blockquote>
+</section>
 
-  <section id="contact" aria-label="Contact Us">
-    <h3 class="cinzel" tabindex="0">Contact</h3>
-    <form>
-      <input type="text" name="name" placeholder="Your Name" required aria-required="true" aria-label="Your Name" />
-      <input type="email" name="email" placeholder="Your Email" required aria-required="true" aria-label="Your Email" />
-      <textarea name="message" placeholder="Your Message" rows="5" required aria-required="true" aria-label="Your Message"></textarea>
-      <button type="submit" aria-label="Send Message">Send</button>
-    </form>
-  </section>
-</main>
+<!-- Contact Section -->
+<section id="contact" tabindex="-1" aria-label="Contact MAWTIF HR">
+  <h3>Contact Us</h3>
+  <form aria-label="Contact form for MAWTIF HR">
+    <input type="text" name="name" placeholder="Your Name" required autocomplete="name" />
+    <input type="email" name="email" placeholder="Your Email" required autocomplete="email" />
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit" aria-label="Send message to MAWTIF HR">Send</button>
+  </form>
+</section>
 
-<footer role="contentinfo">
+<footer>
   &copy; 2025 MAWTIF HR. All rights reserved.
 </footer>
 
 <script>
-  // Menu toggle
+  // Toggle nav menu
   const menuToggle = document.getElementById('menu-toggle');
-  const nav = document.getElementById('primary-menu');
+  const navMenu = document.getElementById('primary-menu');
   menuToggle.addEventListener('click', () => {
     const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
     menuToggle.setAttribute('aria-expanded', !expanded);
-    nav.classList.toggle('active');
+    navMenu.classList.toggle('active');
   });
 
-  // Modal open/close
-  const detailButtons = document.querySelectorAll('button.details-btn');
+  // Close menu when clicking a link
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', false);
+    });
+  });
+
+  // Modal logic
+  const detailsButtons = document.querySelectorAll('button.details-btn');
   const modals = document.querySelectorAll('.modal');
   const closeButtons = document.querySelectorAll('button.close-btn');
 
-  detailButtons.forEach(btn => {
+  detailsButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const modalId = btn.getAttribute('data-modal');
       const modal = document.getElementById(modalId);
-      if(modal) {
+      if (modal) {
         modal.classList.add('active');
-        btn.setAttribute('aria-expanded', 'true');
-        modal.querySelector('button.close-btn').focus();
+        modal.querySelector('.close-btn').focus();
       }
     });
   });
@@ -590,31 +650,26 @@
     btn.addEventListener('click', () => {
       const modal = btn.closest('.modal');
       modal.classList.remove('active');
-      // Find the button that opened this modal to reset aria-expanded
-      const openBtn = [...detailButtons].find(b => b.getAttribute('data-modal') === modal.id);
-      if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
-      openBtn?.focus();
+      // Return focus to corresponding service button
+      const modalId = modal.id;
+      const serviceBtn = document.querySelector(`button[data-modal="${modalId}"]`);
+      if(serviceBtn) serviceBtn.focus();
     });
   });
 
-  // Close modal on outside click
-  modals.forEach(modal => {
-    modal.addEventListener('click', (e) => {
-      if(e.target === modal) {
-        modal.classList.remove('active');
-        const openBtn = [...detailButtons].find(b => b.getAttribute('data-modal') === modal.id);
-        if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
-        openBtn?.focus();
-      }
-    });
-  });
-
-  // Close menu on nav link click (mobile)
-  nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('active');
-      menuToggle.setAttribute('aria-expanded', 'false');
-    });
+  // Close modal on Escape key
+  window.addEventListener('keydown', e => {
+    if(e.key === 'Escape') {
+      modals.forEach(modal => {
+        if(modal.classList.contains('active')) {
+          modal.classList.remove('active');
+          // Return focus to service button
+          const modalId = modal.id;
+          const serviceBtn = document.querySelector(`button[data-modal="${modalId}"]`);
+          if(serviceBtn) serviceBtn.focus();
+        }
+      });
+    }
   });
 </script>
 
